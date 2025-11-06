@@ -47,7 +47,13 @@ const connectDB = async () => {
     });
 
   } catch (error) {
-    logger.error('MongoDB connection failed:', error.message);
+    logger.error('MongoDB connection failed:', error);
+    console.error('MongoDB connection error details:', {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+      mongoUri: process.env.MONGODB_URI ? 'SET' : 'NOT SET'
+    });
     process.exit(1);
   }
 };

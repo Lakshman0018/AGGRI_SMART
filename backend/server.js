@@ -294,6 +294,13 @@ app.locals.io = io;
 // Initialize application
 async function initializeApp() {
   try {
+    // Debug: Check environment variables
+    console.log('🔍 Environment check:');
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    console.log('PORT:', process.env.PORT);
+    console.log('MONGODB_URI:', process.env.MONGODB_URI ? 'SET (' + process.env.MONGODB_URI.substring(0, 20) + '...)' : 'NOT SET');
+    console.log('JWT_SECRET:', process.env.JWT_SECRET ? 'SET' : 'NOT SET');
+    
     // Connect to MongoDB
     await connectDB();
     logger.info('✅ MongoDB connected');
