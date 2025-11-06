@@ -90,8 +90,9 @@ function PlantDetectionEnhanced() {
     try {
       setLoading(true);
       const response = await diseaseService.getMyScans({ page: 1, limit: 10 });
-      if (response.success) {
-        setScanHistory(response.scans || []);
+      // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
+      if (response && response.status === 'success' && response.data) {
+        setScanHistory(response.data.scans || response.data || []);
       }
     } catch (error) {
       console.error('Error loading scan history:', error);
@@ -103,8 +104,9 @@ function PlantDetectionEnhanced() {
   const loadStats = async () => {
     try {
       const response = await diseaseService.getDiseaseStats();
-      if (response.success) {
-        setStats(response.stats);
+      // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
+      if (response && response.status === 'success' && response.data) {
+        setStats(response.data.stats || response.data);
       }
     } catch (error) {
       console.error('Error loading stats:', error);
@@ -145,15 +147,16 @@ function PlantDetectionEnhanced() {
     try {
       const response = await diseaseService.scanDisease(imageFile, cropType);
       
-      if (response.success) {
-        setCurrentScan(response.scan);
+      // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
+      if (response && response.status === 'success' && response.data) {
+        setCurrentScan(response.data.scan || response.data);
         showSuccess('Disease analysis completed successfully!');
         
         // Reload history to include new scan
         loadScanHistory();
         loadStats();
       } else {
-        showError(response.error || 'Failed to analyze image');
+        showError(response?.error || response?.message || 'Failed to analyze image');
       }
     } catch (error) {
       showError('Error analyzing image. Please try again.');
@@ -176,8 +179,9 @@ function PlantDetectionEnhanced() {
   const viewScanDetails = async (scanId) => {
     try {
       const response = await diseaseService.getScanDetails(scanId);
-      if (response.success) {
-        setSelectedScan(response.scan);
+      // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
+      if (response && response.status === 'success' && response.data) {
+        setSelectedScan(response.data.scan || response.data);
         setViewDialog(true);
       }
     } catch (error) {
@@ -189,7 +193,8 @@ function PlantDetectionEnhanced() {
     if (window.confirm('Are you sure you want to delete this scan?')) {
       try {
         const response = await diseaseService.deleteScan(scanId);
-        if (response.success) {
+        // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
+        if (response && response.status === 'success') {
           showSuccess('Scan deleted successfully');
           loadScanHistory();
           loadStats();

@@ -80,8 +80,8 @@ function FertilizerInfo() {
       try {
         setLoading(true);
         const response = await api.get('/info/fertilizers');
-        if (response && response.success) {
-          // Server returns { success: true, data: [...] }
+        // Backend returns: { status: 'success', statusCode: 200, data: [...], message: '...' }
+        if (response && response.status === 'success' && response.data) {
           const fertilizers = Array.isArray(response.data) ? response.data : [];
           if (fertilizers.length > 0) {
             setFertilizersData(fertilizers);

@@ -29,10 +29,16 @@ const AddressBar = () => {
   return (
     <Box
       sx={{
+        position: 'fixed',
+        top: '64px',
+        left: 0,
+        right: 0,
+        zIndex: 40,
         bgcolor: 'primary.main',
         color: 'white',
         py: 1.5,
-        background: 'linear-gradient(90deg, #16a34a 0%, #10b981 100%)'
+        background: 'linear-gradient(90deg, #16a34a 0%, #10b981 100%)',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
       }}
     >
       <Container maxWidth="xl">

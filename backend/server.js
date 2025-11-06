@@ -20,8 +20,8 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 const { generalLimiter } = require('./middleware/rateLimiter');
 
 // Import database config
-const connectDB = require('./config/database');
-const { redisClient, connectRedis } = require('./config/redis');
+const { connectDB } = require('./config/database');
+const { redisClient, cache } = require('./config/redis');
 
 // Configure Winston logger
 const logger = winston.createLogger({
@@ -51,9 +51,9 @@ const infoRoutes = require('./routes/info');
 const productRoutes = require('./routes/product');
 const orderRoutes = require('./routes/order');
 const soilRoutes = require('./routes/soil');
-const weatherRoutes = require('./routes/weather');
 const diseaseRoutes = require('./routes/disease');
 const cropRoutes = require('./routes/crop');
+const priceRoutes = require('./routes/price');
 
 const app = express();
 const server = createServer(app);
@@ -162,6 +162,14 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
 // Make io accessible in routes
 app.set('io', io);
 
+// Root endpoint - must be before API routes to avoid being caught by notFound middleware
+app.get('/', (req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'AgriSmart API is running and ready!'
+  });
+});
+
 // API Routes
 // Use the base paths for all routes
 app.use('/api/auth', authRoutes); // for /api/auth/login, /api/auth/signup
@@ -169,34 +177,11 @@ app.use('/api/info', infoRoutes); // for /api/info/fertilizers, etc.
 app.use('/api/products', productRoutes); // for /api/products
 app.use('/api/orders', orderRoutes); // for /api/orders/checkout, etc.
 app.use('/api/soil', soilRoutes); // for /api/soil
-app.use('/api/weather', weatherRoutes); // for /api/weather/forecast
 app.use('/api/disease', diseaseRoutes); // for /api/disease/scan
 app.use('/api/crop', cropRoutes); // for /api/crop/recommendations
+app.use('/api/price', priceRoutes); // for /api/price/trends
 
-// Error handling middleware (MUST be after routes)
-app.use(notFound);
-app.use(errorHandler);
-
-// Health check endpoint
-app.get('/', (req, res) => {
-  res.json({ 
-    success: true, 
-    message: 'AgriSmart API is running',
-    status: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-    endpoints: {
-      auth: '/api/auth/signup, /api/auth/login',
-      products: '/api/products (GET, POST, PUT, DELETE)',
-      orders: '/api/orders/checkout (POST), /api/orders/my-orders (GET)',
-      soil: '/api/soil (GET, POST), /api/soil/analysis, /api/soil/history',
-      info: '/api/info/fertilizers, /api/info/pests, /api/info/schemes',
-      weather: '/api/weather/forecast, /api/weather/alerts, /api/weather/insights',
-      disease: '/api/disease/scan (POST), /api/disease/my-scans (GET)',
-      crop: '/api/crop/recommendations (GET), /api/crop/calendar (GET)'
-    }
-  });
-});
-
-// Test connectivity endpoint (for debugging)
+// Test connectivity endpoint (for debugging) - MUST be before error handlers
 app.get('/api/test', (req, res) => {
   res.json({ 
     success: true, 
@@ -205,6 +190,10 @@ app.get('/api/test', (req, res) => {
     mongooseStatus: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
   });
 });
+
+// Error handling middleware (MUST be after routes)
+app.use(notFound);
+app.use(errorHandler);
 
 // API documentation endpoint
 app.get('/api/docs', (req, res) => {
@@ -309,9 +298,12 @@ async function initializeApp() {
     await connectDB();
     logger.info('✅ MongoDB connected');
     
-    // Connect to Redis
-    await connectRedis();
-    logger.info('✅ Redis connected');
+    // Redis is optional - already attempting connection in redis.js
+    if (redisClient?.isOpen) {
+      logger.info('✅ Redis connected');
+    } else {
+      logger.warn('⚠️ Redis not available - running without cache');
+    }
     
     // Start server
     startServer();

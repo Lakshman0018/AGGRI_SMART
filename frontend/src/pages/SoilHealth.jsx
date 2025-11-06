@@ -52,7 +52,8 @@ function SoilHealth() {
       }
       try {
         const response = await api.get('/soil');
-        if (response && response.success) {
+        // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
+        if (response && response.status === 'success' && response.data) {
           const data = response.data;
           setSavedSoilData(data);
           // Pre-fill form if data exists

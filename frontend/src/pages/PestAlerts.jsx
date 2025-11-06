@@ -79,7 +79,8 @@ function PestAlerts() {
       try {
         setLoading(true);
         const response = await api.get('/info/pests');
-        if (response && response.success) {
+        // Backend returns: { status: 'success', statusCode: 200, data: [...], message: '...' }
+        if (response && response.status === 'success' && response.data) {
           const pests = Array.isArray(response.data) ? response.data : [];
           if (pests.length > 0) {
             setPestsData(pests);

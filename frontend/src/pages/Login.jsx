@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { TextField, Button, IconButton, InputAdornment, Checkbox, FormControlLabel, Paper, Alert, CircularProgress } from '@mui/material';
 import { Visibility, VisibilityOff, Email, Lock } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
@@ -15,12 +15,16 @@ const Login = () => {
   
   const { login, loading, error, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the intended destination from location state (set by ProtectedRoute)
+  const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     if (isAuthenticated()) {
-      navigate('/');
+      navigate(from, { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, from]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +47,10 @@ const Login = () => {
 
     // Call login from AuthContext
     const result = await login(formData);
-    if (!result.success) {
+    if (result.success) {
+      // Redirect to intended destination or home
+      navigate(from, { replace: true });
+    } else {
       setLocalError(result.error);
     }
   };

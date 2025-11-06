@@ -79,7 +79,7 @@
                                 <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
                                     <Navbar />
                                     <AddressBar />
-                                    <main className="container mx-auto px-4 py-8">
+                                    <main className="container mx-auto px-4 py-8" style={{ marginTop: '140px' }}>
                                         <Suspense fallback={<LoadingFallback />}>
                                             <Routes>
                                                 {/* Public Routes */}

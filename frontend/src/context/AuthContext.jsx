@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, []);
 
-  const login = async (credentials) => {
+  const login = async (credentials, redirectPath = null) => {
     setError(null);
     setLoading(true);
     
@@ -48,10 +48,10 @@ export const AuthProvider = ({ children }) => {
       // Make API call to backend
       const response = await api.post(API_ENDPOINTS.AUTH.LOGIN, credentials);
       
-      // Response from server: { success: true, token, user, message }
-      if (response && response.success) {
-        const token = response.token;
-        const user = response.user;
+      // Backend returns: { status: 'success', statusCode: 200, data: { user, accessToken }, message: 'Login successful' }
+      if (response && response.status === 'success' && response.data) {
+        const token = response.data.accessToken;
+        const user = response.data.user;
         
         if (token && user) {
           // Save to localStorage
@@ -59,7 +59,10 @@ export const AuthProvider = ({ children }) => {
           localStorage.setItem('agrismart_user', JSON.stringify(user));
           
           setUser(user);
-          navigate('/');
+          
+          // Navigate to redirectPath if provided, otherwise home
+          // Note: The Login component will handle navigation, so we don't navigate here
+          // This allows the Login component to handle the redirect from ProtectedRoute
           return { success: true, user };
         } else {
           throw new Error('Invalid response: Missing token or user');
@@ -87,10 +90,10 @@ export const AuthProvider = ({ children }) => {
       // Make API call to backend
       const response = await api.post(API_ENDPOINTS.AUTH.SIGNUP, userData);
       
-      // Response from server: { success: true, token, user, message }
-      if (response && response.success) {
-        const token = response.token;
-        const user = response.user;
+      // Backend returns: { status: 'success', statusCode: 201, data: { user, accessToken }, message: 'Registration successful' }
+      if (response && response.status === 'success' && response.data) {
+        const token = response.data.accessToken;
+        const user = response.data.user;
         
         if (token && user) {
           // Save to localStorage
@@ -98,6 +101,8 @@ export const AuthProvider = ({ children }) => {
           localStorage.setItem('agrismart_user', JSON.stringify(user));
           
           setUser(user);
+          
+          // Navigate to home after successful signup
           navigate('/');
           return { success: true, user };
         } else {
@@ -137,14 +142,15 @@ export const AuthProvider = ({ children }) => {
       // Make API call to update profile
       const response = await api.put(API_ENDPOINTS.AUTH.UPDATE_PROFILE, profileData);
       
-      if (response.success && response.data) {
-        const updatedUser = response.data.user || response.data;
+      // Backend returns: { status: 'success', statusCode: 200, data: user, message: 'Profile updated successfully' }
+      if (response && response.status === 'success' && response.data) {
+        const updatedUser = response.data;
         localStorage.setItem('agrismart_user', JSON.stringify(updatedUser));
         setUser(updatedUser);
         
         return { success: true, user: updatedUser };
       } else {
-        throw new Error(response.error || 'Profile update failed');
+        throw new Error(response?.error || response?.message || 'Profile update failed');
       }
     } catch (error) {
       console.error('Profile update error:', error);

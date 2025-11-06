@@ -1,6 +1,5 @@
 const CropRecommendation = require('../models/CropRecommendation');
 const SoilData = require('../models/SoilData');
-const WeatherForecast = require('../models/WeatherForecast');
 const { asyncHandler } = require('../middleware/errorHandler');
 
 // Crop database with requirements
@@ -191,10 +190,8 @@ exports.getCropRecommendations = asyncHandler(async (req, res) => {
   // Get user's soil data if available
   const userSoilData = await SoilData.findOne({ user: req.user._id });
   
-  // Get recent weather data
-  const weatherData = await WeatherForecast.findOne({
-    location: region || req.user.location || 'Default'
-  }).sort({ date: -1 });
+  // Weather data removed - using default values
+  const weatherData = null;
   
   const currentSeason = customSeason || season || getCurrentSeason();
   

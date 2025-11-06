@@ -429,3 +429,61 @@ exports.rateProduct = asyncHandler(async (req, res) => {
     new ApiResponse(200, product, 'Product rated successfully')
   );
 });
+
+// Search products
+exports.searchProducts = asyncHandler(async (req, res) => {
+  const { q, category, limit = 20 } = req.query;
+  
+  const query = { isActive: true };
+  
+  if (q) {
+    query.$or = [
+      { name: { $regex: q, $options: 'i' } },
+      { description: { $regex: q, $options: 'i' } },
+      { tags: { $in: [new RegExp(q, 'i')] } }
+    ];
+  }
+  
+  if (category) {
+    query.category = category;
+  }
+  
+  const products = await Product.find(query)
+    .populate('seller', 'name location')
+    .limit(parseInt(limit))
+    .sort({ views: -1 });
+  
+  res.json(
+    new ApiResponse(200, products, 'Products found')
+  );
+});
+
+// Get products by category
+exports.getProductsByCategory = asyncHandler(async (req, res) => {
+  const { category } = req.params;
+  const { limit = 20, page = 1 } = req.query;
+  
+  const skip = (page - 1) * limit;
+  
+  const products = await Product.find({ 
+    category, 
+    isActive: true 
+  })
+    .populate('seller', 'name location')
+    .skip(skip)
+    .limit(parseInt(limit))
+    .sort({ createdAt: -1 });
+  
+  const total = await Product.countDocuments({ category, isActive: true });
+  
+  res.json(
+    new ApiResponse(200, {
+      products,
+      pagination: {
+        total,
+        page: parseInt(page),
+        pages: Math.ceil(total / limit)
+      }
+    }, 'Products fetched successfully')
+  );
+});

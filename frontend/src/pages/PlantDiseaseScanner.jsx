@@ -38,7 +38,6 @@ import {
   Error as ErrorIcon,
   ExpandMore,
   LocalHospital,
-  Eco,
   Science,
   Timeline,
   WaterDrop,
@@ -49,6 +48,7 @@ import {
   Refresh,
   Info
 } from '@mui/icons-material';
+// Eco icon not available in this MUI version; remove usage
 import { motion, AnimatePresence } from 'framer-motion';
 import { diseaseAPI } from '../services/api';
 import toast from 'react-hot-toast';
@@ -205,7 +205,6 @@ const PlantDiseaseScanner = () => {
             label={type === 'organic' ? 'Organic' : 'Chemical'} 
             size="small"
             color={type === 'organic' ? 'success' : 'warning'}
-            icon={type === 'organic' ? <Eco /> : <Science />}
           />
         </Box>
         <Grid container spacing={2}>
@@ -472,10 +471,9 @@ const PlantDiseaseScanner = () => {
                     
                     <Accordion defaultExpanded>
                       <AccordionSummary expandIcon={<ExpandMore />}>
-                        <Box className="flex items-center gap-2">
-                          <Eco className="text-green-600" />
-                          <Typography>Organic Treatments</Typography>
-                        </Box>
+              <Box className="flex items-center gap-2">
+                <Typography>Organic Treatments</Typography>
+              </Box>
                       </AccordionSummary>
                       <AccordionDetails>
                         {scanResult.treatmentPlan.organic.map((treatment, index) => (

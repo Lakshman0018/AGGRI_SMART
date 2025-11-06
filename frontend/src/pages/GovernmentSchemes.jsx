@@ -75,7 +75,8 @@ function GovernmentSchemes() {
             try {
                 setLoading(true);
                 const response = await api.get('/info/schemes');
-                if (response && response.success) {
+                // Backend returns: { status: 'success', statusCode: 200, data: [...], message: '...' }
+                if (response && response.status === 'success' && response.data) {
                     const schemes = Array.isArray(response.data) ? response.data : [];
                     setGovernmentSchemes(schemes);
                 }

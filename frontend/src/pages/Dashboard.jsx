@@ -55,20 +55,33 @@ const Dashboard = () => {
     setLoading(true);
     try {
       const [weatherData, soilData, scansData, ordersData] = await Promise.all([
-        weatherService.getForecast(user?.location),
+        weatherService.getForecast(user?.location).catch(() => null),
         soilService.getSoilHealthAnalysis().catch(() => null),
-        diseaseService.getMyScans({ page: 1, limit: 3 }).catch(() => ({ scans: [] })),
+        diseaseService.getMyScans({ page: 1, limit: 3 }).catch(() => null),
         user?.role === 'Farmer' 
-          ? Promise.resolve({ orders: [] })
-          : orderService.getMyOrders({ page: 1, limit: 3 }).catch(() => ({ orders: [] }))
+          ? Promise.resolve(null)
+          : orderService.getMyOrders({ page: 1, limit: 3 }).catch(() => null)
       ]);
 
+      // Backend returns: { status: 'success', statusCode: 200, data: {...}, message: '...' }
       setDashboardData({
-        weather: weatherData?.weather,
-        soilHealth: soilData?.analysis,
-        recentScans: scansData?.scans || [],
-        recentOrders: ordersData?.orders || [],
-        alerts: weatherData?.weather?.alerts || []
+        weather: weatherData?.status === 'success' 
+          ? (weatherData.data?.weather || weatherData.data)
+          : null,
+        soilHealth: soilData?.status === 'success'
+          ? (soilData.data?.analysis || soilData.data)
+          : null,
+        recentScans: scansData?.status === 'success'
+          ? (scansData.data?.scans || scansData.data || [])
+          : [],
+        recentOrders: ordersData?.status === 'success'
+          ? (ordersData.data?.orders || ordersData.data || [])
+          : [],
+        alerts: weatherData?.status === 'success' && weatherData.data?.weather?.alerts
+          ? weatherData.data.weather.alerts
+          : weatherData?.status === 'success' && weatherData.data?.alerts
+          ? weatherData.data.alerts
+          : []
       });
     } catch (error) {
       console.error('Dashboard load error:', error);
