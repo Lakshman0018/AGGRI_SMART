@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - GitHub repository: https://github.com/Lakshman0018/AGGRI_SMART.git
-- Frontend already deployed at: https://shiny-swan-18d637.netlify.app/
+- Frontend already deployed at: https://aggrismart-user.netlify.app/
 
 ## Step-by-Step Deployment Guide
 
@@ -126,5 +126,5 @@ VITE_GEMINI_API_KEY=AIzaSyBxuYXXKbbr1Y1Aewmpdj2ROhypawy1_Dw
 ---
 
 **Your Deployment URLs:**
-- Frontend: https://shiny-swan-18d637.netlify.app
+- Frontend: https://aggrismart-user.netlify.app/
 - Backend: https://your-backend-url.onrender.com (after deployment)
