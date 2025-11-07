@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - GitHub repository: https://github.com/Lakshman0018/AGGRI_SMART.git
-- Frontend already deployed at: https://aggrismart-user.netlify.app/
+- Frontend already deployed at: https://digital-agrimart.onrender.com/
 
 ## Step-by-Step Deployment Guide
 
@@ -33,7 +33,7 @@ PORT=10000
 MONGODB_URI=mongodb+srv://aggri_smart:lakshman%4069@cluster0.wwkcncb.mongodb.net/agri_db?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=THIS_IS_A_SUPER_SECURE_RANDOM_KEY_FOR_JWT_987654
 REFRESH_TOKEN_SECRET=REFRESH_TOKEN_SUPER_SECRET_KEY_123456
-CLIENT_URL=https://aggrismart-user.netlify.app/
+CLIENT_URL=https://digital-agrimart.onrender.com/
 OPENWEATHER_API_KEY=185d173fbf66e20d26b138058524f3c8
 GEMINI_API_KEY=AIzaSyBxuYXXKbbr1Y1Aewmpdj2ROhypawy1_Dw
 LOG_LEVEL=info
@@ -126,5 +126,5 @@ VITE_GEMINI_API_KEY=AIzaSyBxuYXXKbbr1Y1Aewmpdj2ROhypawy1_Dw
 ---
 
 **Your Deployment URLs:**
-- Frontend: https://aggrismart-user.netlify.app/
+- Frontend:https://digital-agrimart.onrender.com/
 - Backend: https://your-backend-url.onrender.com (after deployment)
