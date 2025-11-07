@@ -33,7 +33,7 @@ PORT=10000
 MONGODB_URI=mongodb+srv://aggri_smart:lakshman%4069@cluster0.wwkcncb.mongodb.net/agri_db?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=THIS_IS_A_SUPER_SECURE_RANDOM_KEY_FOR_JWT_987654
 REFRESH_TOKEN_SECRET=REFRESH_TOKEN_SUPER_SECRET_KEY_123456
-CLIENT_URL=https://shiny-swan-18d637.netlify.app
+CLIENT_URL=https://aggrismart-user.netlify.app/
 OPENWEATHER_API_KEY=185d173fbf66e20d26b138058524f3c8
 GEMINI_API_KEY=AIzaSyBxuYXXKbbr1Y1Aewmpdj2ROhypawy1_Dw
 LOG_LEVEL=info
