@@ -19,6 +19,7 @@
     import AddressBar from './components/AddressBar.jsx';
     import Footer from './components/Footer.jsx';
     import ProtectedRoute from './components/ProtectedRoute.jsx';
+    import ScrollToTop from './components/ScrollToTop.jsx';
 
     // Lazy load pages for better performance
     const Home = lazy(() => import('./pages/Home.jsx'));
@@ -73,6 +74,7 @@
                         <CssBaseline />
                         <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                             <Router>
+                                <ScrollToTop />
                                 <NotificationProvider>
                                     <AuthProvider>
                                         <CartProvider>
@@ -108,7 +110,7 @@
                                                 } />
                                                 <Route path="/plant-detection" element={
                                                     <ProtectedRoute>
-                                                        <PlantDetection />
+                                                        <PlantDiseaseScanner />
                                                     </ProtectedRoute>
                                                 } />
                                                 <Route path="/weather-forecast" element={

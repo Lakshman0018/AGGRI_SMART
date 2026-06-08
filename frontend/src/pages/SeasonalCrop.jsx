@@ -172,7 +172,8 @@ function SeasonalCrop() {
                 <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
                   <Card
                     sx={{
-                      bgcolor: 'primary.light',
+                      bgcolor: '#f0fdf4',
+                      border: '1px solid #bbf7d0',
                       borderRadius: 2,
                       textAlign: 'center',
                       transition: 'all 0.3s',
@@ -180,6 +181,7 @@ function SeasonalCrop() {
                       '&:hover': {
                         transform: 'translateY(-4px)',
                         boxShadow: 4,
+                        bgcolor: '#dcfce7',
                       },
                     }}
                   >

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Irrigation | AgriSmart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#a9d1a8",
+                        "on-secondary-fixed-variant": "#005313",
+                        "background": "#f9f9f9",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-surface": "#2f3131",
+                        "on-tertiary-fixed": "#291800",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#727970",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#9dc49d",
+                        "surface-tint": "#436746",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#e3c193",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffddb1",
+                        "secondary-fixed": "#94f990",
+                        "outline-variant": "#c2c8be",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed": "#002108",
+                        "primary-fixed": "#c4edc3",
+                        "secondary": "#006e1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#2f5233",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#00731e",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5a431f",
+                        "on-tertiary-container": "#d6b587",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#78dc77",
+                        "on-background": "#1a1c1c",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-bright": "#f9f9f9",
+                        "primary-fixed-dim": "#a9d1a8",
+                        "secondary-container": "#91f78e",
+                        "primary": "#183b1e",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#5e4622",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed": "#002204",
+                        "surface-dim": "#dadada",
+                        "tertiary": "#45300d",
+                        "on-surface-variant": "#424841",
+                        "on-primary-fixed-variant": "#2b4e30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "base": "8px",
+                        "md": "24px",
+                        "margin-desktop": "40px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-md-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md-mobile": ["22px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Shadows for Elevation */
+        .elevation-1 { box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); }
+        .elevation-2 { box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.10); }
+        
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .bento-span-12 { grid-column: span 12; }
+        .bento-span-8 { grid-column: span 8; }
+        .bento-span-4 { grid-column: span 4; }
+        .bento-span-6 { grid-column: span 6; }
+        
+        @media (max-width: 768px) {
+            .bento-span-8, .bento-span-4, .bento-span-6 { grid-column: span 12; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col py-md space-y-base h-full w-64 fixed left-0 top-0 bg-surface border-r border-outline-variant shadow-sm z-50">
+<div class="px-md mb-lg">
+<h1 class="font-headline-sm text-headline-sm text-primary font-bold">AgriSmart</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Precision Farming</p>
+</div>
+<div class="flex-1 flex flex-col space-y-xs pr-sm">
+<a class="flex items-center px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" data-icon="home">home</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<a class="flex items-center px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" data-icon="storefront">storefront</span>
+<span class="font-body-md text-body-md">Marketplace</span>
+</a>
+<a class="flex items-center px-md py-sm bg-primary-container text-on-primary-container font-bold rounded-r-full hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm fill" data-icon="agriculture" data-weight="fill">agriculture</span>
+<span class="font-body-md text-body-md">My Farm</span>
+</a>
+<a class="flex items-center px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" data-icon="psychiatry">psychiatry</span>
+<span class="font-body-md text-body-md">Crop Advisor</span>
+</a>
+<a class="flex items-center px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" data-icon="person">person</span>
+<span class="font-body-md text-body-md">Account</span>
+</a>
+</div>
+<div class="px-md mt-auto">
+<button class="w-full bg-[#4CAF50] text-white py-sm rounded-[8px] font-body-md font-bold hover:opacity-90 transition-opacity">Get Expert Advice</button>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-16 bg-primary text-on-primary docked full-width top-0 shadow-md z-40 fixed">
+<h1 class="text-headline-md-mobile font-headline-md-mobile text-on-primary">AgriSmart</h1>
+<div class="flex space-x-sm">
+<span class="material-symbols-outlined text-on-primary" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined text-on-primary" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 mt-16 md:mt-0 p-margin-mobile md:p-margin-desktop bg-background min-h-screen">
+<!-- Header Section -->
+<div class="mb-lg">
+<h2 class="font-display-lg text-display-lg text-primary mb-xs">Smart Irrigation</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Optimize water usage with intelligent scheduling and conservation techniques based on real-time field data.</p>
+</div>
+<!-- Tabbed Navigation -->
+<div class="flex space-x-sm border-b border-outline-variant mb-md overflow-x-auto pb-xs">
+<button class="px-sm py-sm font-label-md text-label-md text-primary border-b-2 border-primary whitespace-nowrap">Irrigation Systems</button>
+<button class="px-sm py-sm font-label-md text-label-md text-on-surface-variant hover:text-primary whitespace-nowrap transition-colors">Crop Schedule</button>
+<button class="px-sm py-sm font-label-md text-label-md text-on-surface-variant hover:text-primary whitespace-nowrap transition-colors">Water Conservation</button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="bento-grid">
+<!-- Hero Image/Status Card -->
+<div class="bento-span-12 md:bento-span-8 bg-surface-container-lowest rounded-xl elevation-1 overflow-hidden flex flex-col relative h-[400px]">
+<div class="absolute inset-0 z-0">
+<img alt="" class="w-full h-full object-cover opacity-80" data-alt="A high-angle drone shot of a lush, perfectly arranged farm field under bright, clear sunlight. The modern agricultural setting showcases neat rows of crops with a sophisticated smart irrigation system visibly misting water. The color palette emphasizes vibrant natural greens, earthy browns, and the sparkling blue of water, creating a fresh, technologically advanced, and nurturing aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU46XIGiFyMgEDdhkLQH_G7_PHJ_o1UUrA7ed1c7w5VHgBNIBZHJtoDgEpUtOsxqEztmONYnFrewD_WfkH1yhy-PUq_jGzZr02nHFOw0ZXGWrcLddTgi06xTjqnlc7f_ZKHAaPKG3c9Pzb1N2rcuYww8iYTxoiIvghsALq_QXk6LuPozaStIYTEYtgER3Z7-25-0Ll8AJ63OkQpkA4mZH1iWAIkCODwtEx31C5hWqnxTzLjvMhIbOtjfW8xPi3qeyFpSOkosOh7t0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+<div class="z-10 mt-auto p-md text-white">
+<div class="flex items-center space-x-xs mb-sm">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="water_drop" data-weight="fill">water_drop</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary-fixed">System Active</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-xs text-white">North Field Center Pivot</h3>
+<p class="font-body-md text-body-md text-white/90 mb-md max-w-lg">Currently applying 12mm of water based on soil moisture sensor data. Estimated completion in 2 hours.</p>
+<div class="flex space-x-md">
+<div>
+<p class="font-label-md text-label-md text-white/70 uppercase">Moisture Level</p>
+<p class="font-headline-sm text-headline-sm text-secondary-fixed">68%</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-white/70 uppercase">Efficiency</p>
+<p class="font-headline-sm text-headline-sm text-secondary-fixed">92%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Water Savings -->
+<div class="bento-span-12 md:bento-span-4 bg-primary text-on-primary rounded-xl elevation-1 p-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-md">
+<h4 class="font-headline-sm text-headline-sm text-on-primary">Water Conserved</h4>
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="eco">eco</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-primary/80 mb-lg">Compared to traditional flood irrigation this season.</p>
+<div class="text-center py-lg">
+<p class="font-display-lg text-display-lg text-secondary-fixed">1.2M L</p>
+<p class="font-label-md text-label-md text-on-primary/80 uppercase mt-xs">Total Saved</p>
+</div>
+</div>
+<button class="w-full border border-secondary-fixed text-secondary-fixed py-sm rounded-[8px] font-body-md hover:bg-secondary-fixed/10 transition-colors">View Report</button>
+</div>
+<!-- Drip Irrigation Card -->
+<div class="bento-span-12 md:bento-span-4 bg-surface-container-lowest rounded-xl elevation-1 p-md border border-outline-variant/30 relative group">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center space-x-sm">
+<div class="p-xs bg-primary-container/20 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="opacity">opacity</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Drip Line A</h4>
+</div>
+<span class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">Optimal</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Tomato crop zone. High precision targeting root zones.</p>
+<div class="space-y-sm mb-md">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs text-on-surface-variant">
+<span>Efficiency vs Flood</span>
+<span class="text-secondary font-bold">+45%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-[#4CAF50] h-2 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+<button class="flex items-center text-primary font-label-md text-label-md hover:underline mt-auto">
+                    View Details <span class="material-symbols-outlined text-[16px] ml-xs" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+<!-- Sprinkler Card -->
+<div class="bento-span-12 md:bento-span-4 bg-surface-container-lowest rounded-xl elevation-1 p-md border border-outline-variant/30 relative group">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center space-x-sm">
+<div class="p-xs bg-primary-container/20 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="shower">shower</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Micro-Sprinkler</h4>
+</div>
+<span class="px-sm py-xs bg-surface-container-high text-on-surface rounded-full font-label-md text-label-md">Idle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Orchard zone. Scheduled for early morning to reduce evaporation.</p>
+<div class="space-y-sm mb-md">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs text-on-surface-variant">
+<span>Efficiency vs Flood</span>
+<span class="text-secondary font-bold">+25%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-[#4CAF50] h-2 rounded-full" style="width: 70%"></div>
+</div>
+</div>
+</div>
+<button class="flex items-center text-primary font-label-md text-label-md hover:underline mt-auto">
+                    View Details <span class="material-symbols-outlined text-[16px] ml-xs" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+<!-- Gravity Flow Card -->
+<div class="bento-span-12 md:bento-span-4 bg-surface-container-lowest rounded-xl elevation-1 p-md border border-outline-variant/30 relative group">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center space-x-sm">
+<div class="p-xs bg-error-container/50 rounded-lg text-on-error-container">
+<span class="material-symbols-outlined" data-icon="waves">waves</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Gravity Flow</h4>
+</div>
+<span class="px-sm py-xs bg-error-container text-on-error-container rounded-full font-label-md text-label-md">Needs Review</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">South pasture. Legacy system showing high runoff rates.</p>
+<div class="space-y-sm mb-md">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs text-on-surface-variant">
+<span>Efficiency vs Flood</span>
+<span class="text-on-surface-variant font-bold">Baseline</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-outline h-2 rounded-full" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<button class="flex items-center text-primary font-label-md text-label-md hover:underline mt-auto">
+                    View Details <span class="material-symbols-outlined text-[16px] ml-xs" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-primary dark:bg-surface-container-highest border-t border-primary-container px-margin-desktop py-xl mt-xl z-10 relative">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg mb-lg">
+<div class="col-span-2 md:col-span-1">
+<h3 class="font-headline-sm text-headline-sm text-on-primary mb-sm">AgriSmart</h3>
+<p class="font-body-md text-body-md text-on-primary/70">Precision Farming</p>
+</div>
+<div class="flex flex-col space-y-sm">
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Plant Detection</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Fertilizer Info</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Weather Forecast</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Soil Health</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Seasonal Crops</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Pest Alerts</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Irrigation Guide</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Government Schemes</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Help Center</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-primary/70 hover:text-on-primary hover:underline transition-all opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+</div>
+</div>
+<div class="text-center border-t border-primary-container/50 pt-md">
+<p class="font-body-md text-body-md text-on-primary/70">© 2026 AgriSmart. All rights reserved. | Built for Smart Farmers</p>
+</div>
+</footer>
+</body></html>

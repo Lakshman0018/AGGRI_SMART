@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crop Price Trends - AgriSmart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#198038',
+            'primary-light': '#E8F5E9',
+            'surface-container-lowest': '#ffffff',
+            'surface-container-low': '#f3f3f3',
+            'surface': '#f9f9f9',
+            'on-surface': '#1c1c1c',
+            'on-surface-variant': '#474747',
+            'outline-variant': '#c5c5c5',
+          },
+          borderRadius: {
+            'xl': '1rem',
+            '2xl': '1.5rem',
+          }
+        }
+      }
+    }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-utilities">
+    body {
+      background-color: #f4f7f6;
+    }
+    .card-shadow {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+  </style>
+<!-- Including Chart.js for rendering charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="font-sans text-on-surface antialiased min-h-screen flex flex-col">
+<!-- BEGIN: NavigationBar -->
+<nav class="bg-surface-container-lowest border-b border-outline-variant px-6 py-3 flex items-center justify-between shadow-sm sticky top-0 z-50">
+<div class="flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M11 20A7 7 0 0 1 4 13v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3a7 7 0 0 1-7 7z"></path><path d="M15 17a5 5 0 0 0 5-5v-2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5z"></path><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"></path></svg>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-tight text-[#2f5233]">AgriSmart</h1>
+<p class="text-[10px] text-on-surface-variant leading-none">Smart Farming</p>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg hover:bg-surface-container-low" href="#" title="Home">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg hover:bg-surface-container-low" href="#" title="Market">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg hover:bg-surface-container-low" href="#" title="Crops">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+</a>
+<a class="text-primary bg-primary-light flex items-center justify-center p-2 rounded-lg" href="#" title="Analytics">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="m9 14 2-2 4 4"></path><path d="M17 8h-4.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3H9"></path></svg>
+</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors relative">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+<span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-low border border-outline-variant flex items-center justify-center font-medium text-primary">
+        K
+      </button>
+</div>
+</nav>
+<!-- END: NavigationBar -->
+<!-- BEGIN: AddressBar -->
+<div class="bg-primary text-white px-6 py-2 flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<span class="opacity-80">DELIVER TO</span>
+<span class="font-medium">No address set</span>
+</div>
+<button class="flex items-center gap-1 hover:underline font-medium">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+      Add Address
+    </button>
+</div>
+<!-- END: AddressBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex flex-col gap-8">
+<!-- BEGIN: Header Section -->
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Crop Price <span class="text-primary">Trends</span></h2>
+<p class="text-lg text-on-surface-variant">Track market prices, analyze trends, and make informed decisions about your crop sales and purchases.</p>
+</div>
+<!-- END: Header Section -->
+<!-- BEGIN: Controls Section -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 md:p-8 card-shadow border border-outline-variant/30 flex flex-col lg:flex-row gap-8">
+<!-- Crop Selection -->
+<div class="flex-1">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">Select Crop 🌾</h3>
+<div class="grid grid-cols-3 gap-3 md:gap-4">
+<button class="flex flex-col items-center justify-center p-4 border-2 border-primary bg-primary-light rounded-xl text-primary font-medium hover:bg-primary-light/80 transition-colors">
+<span class="text-2xl mb-2">🌾</span>
+            Rice
+          </button>
+<button class="flex flex-col items-center justify-center p-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-on-surface hover:bg-surface transition-colors">
+<span class="text-2xl mb-2">🌽</span>
+            Wheat
+          </button>
+<button class="flex flex-col items-center justify-center p-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-on-surface hover:bg-surface transition-colors">
+<span class="text-2xl mb-2">🍅</span>
+            Tomato
+          </button>
+<button class="flex flex-col items-center justify-center p-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-on-surface hover:bg-surface transition-colors">
+<span class="text-2xl mb-2">🥔</span>
+            Potato
+          </button>
+<button class="flex flex-col items-center justify-center p-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-on-surface hover:bg-surface transition-colors">
+<span class="text-2xl mb-2">🧅</span>
+            Onion
+          </button>
+<button class="flex flex-col items-center justify-center p-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-on-surface hover:bg-surface transition-colors">
+<span class="text-2xl mb-2">🌽</span>
+            Corn
+          </button>
+</div>
+</div>
+<!-- Time Range Selection -->
+<div class="lg:w-1/3">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">Time Range 🗓️</h3>
+<div class="grid grid-cols-2 gap-3 md:gap-4">
+<button class="py-3 px-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-center text-on-surface font-medium hover:bg-surface transition-colors">
+            1 Month
+          </button>
+<button class="py-3 px-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-center text-on-surface font-medium hover:bg-surface transition-colors">
+            3 Months
+          </button>
+<button class="py-3 px-4 border-2 border-primary bg-primary-light rounded-xl text-center text-primary font-medium hover:bg-primary-light/80 transition-colors">
+            6 Months
+          </button>
+<button class="py-3 px-4 border border-outline-variant/50 hover:border-primary/50 rounded-xl text-center text-on-surface font-medium hover:bg-surface transition-colors">
+            1 Year
+          </button>
+</div>
+</div>
+</div>
+<!-- END: Controls Section -->
+<!-- BEGIN: Quick Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute top-4 right-4 text-green-600 font-medium text-sm flex items-center gap-1">
+          +0.8%
+          <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m18 15-6-6-6 6"></path></svg>
+</div>
+<div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-xl">📈</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1">Price Trend</p>
+<p class="text-2xl font-bold text-green-600">Rising</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
+<div class="w-10 h-10 bg-yellow-50 rounded-xl flex items-center justify-center mb-4 text-xl">💰</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1">Current Price</p>
+<p class="text-2xl font-bold text-primary">₹44.64/kg</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
+<div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center mb-4 text-xl">📊</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1">Avg Volume</p>
+<p class="text-2xl font-bold text-blue-600">955 tons</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
+<div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-4 text-xl">📏</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1">Price Range</p>
+<p class="text-2xl font-bold text-purple-600">₹36.76 - ₹54.58</p>
+</div>
+</div>
+<!-- END: Quick Stats Cards -->
+<!-- BEGIN: Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+<!-- Price Trend Line Chart -->
+<div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl card-shadow border border-outline-variant/30 flex flex-col">
+<h3 class="text-xl font-bold mb-6 text-center flex items-center justify-center gap-2">Price Trend 📈</h3>
+<div class="chart-container flex-grow relative w-full h-[300px]">
+<canvas id="priceTrendChart"></canvas>
+</div>
+</div>
+<!-- Trading Volume Bar Chart -->
+<div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl card-shadow border border-outline-variant/30 flex flex-col">
+<h3 class="text-xl font-bold mb-6 text-center flex items-center justify-center gap-2">Trading Volume 📊</h3>
+<div class="chart-container flex-grow relative w-full h-[300px]">
+<canvas id="tradingVolumeChart"></canvas>
+</div>
+</div>
+</div>
+<!-- END: Charts Section -->
+<!-- BEGIN: Market Analysis -->
+<div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl card-shadow border border-outline-variant/30">
+<h3 class="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">Market Analysis 💡</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Prediction Card -->
+<div class="bg-green-50/50 p-6 rounded-xl border border-green-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm text-xl border border-gray-100">📈</div>
+<h4 class="font-bold text-lg mb-2">Price Prediction</h4>
+<p class="text-sm text-on-surface-variant mb-4 leading-relaxed">Based on current trends, Rice prices are expected to continue rising in the coming weeks.</p>
+<p class="text-sm font-medium text-green-700">Confidence: 78%</p>
+</div>
+<!-- Best Time Card -->
+<div class="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm text-xl border border-gray-100">🎯</div>
+<h4 class="font-bold text-lg mb-2">Best Selling Time</h4>
+<p class="text-sm text-on-surface-variant mb-4 leading-relaxed">Historical data suggests the best time to sell Rice is during peak demand periods, typically in the early morning hours at wholesale markets.</p>
+<p class="text-sm font-medium text-blue-700">Peak Hours: 6-9 AM</p>
+</div>
+<!-- Risks Card -->
+<div class="bg-purple-50/50 p-6 rounded-xl border border-purple-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm text-xl border border-gray-100">⚠️</div>
+<h4 class="font-bold text-lg mb-2">Market Risks</h4>
+<p class="text-sm text-on-surface-variant mb-4 leading-relaxed">Monitor weather conditions, government policies, and supply chain disruptions that could significantly impact Rice prices.</p>
+<p class="text-sm font-medium text-purple-700">Risk Level: Moderate</p>
+</div>
+</div>
+</div>
+<!-- END: Market Analysis -->
+<!-- BEGIN: Trading Tips Footer -->
+<div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl card-shadow border border-outline-variant/30 mb-10">
+<h3 class="text-xl font-bold mb-6 text-center flex items-center justify-center gap-2">Trading Tips 💰</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+<div class="flex gap-4">
+<div class="text-2xl">📱</div>
+<div>
+<h4 class="font-bold mb-1">Monitor Daily Prices</h4>
+<p class="text-sm text-on-surface-variant">Check prices daily to identify patterns and optimal selling times.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-2xl">💻</div>
+<div>
+<h4 class="font-bold mb-1">Use Technology</h4>
+<p class="text-sm text-on-surface-variant">Leverage mobile apps and online platforms for real-time price updates.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-2xl">🌦️</div>
+<div>
+<h4 class="font-bold mb-1">Weather Impact</h4>
+<p class="text-sm text-on-surface-variant">Weather forecasts can significantly affect crop prices and demand.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-2xl">🤝</div>
+<div>
+<h4 class="font-bold mb-1">Build Networks</h4>
+<p class="text-sm text-on-surface-variant">Connect with other farmers and traders for better market insights.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Trading Tips Footer -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Site Footer -->
+<footer class="bg-[#2f5233] text-white py-12 px-6 sm:px-10 mt-auto">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+<div class="lg:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center text-primary font-bold text-xl">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 20A7 7 0 0 1 4 13v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3a7 7 0 0 1-7 7z"></path><path d="M15 17a5 5 0 0 0 5-5v-2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5z"></path><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"></path></svg>
+</div>
+<div>
+<h2 class="font-bold text-xl leading-tight">AgriSmart</h2>
+<p class="text-xs text-white/70 leading-none">Smart Farming Solutions</p>
+</div>
+</div>
+<p class="text-white/80 text-sm mb-6 max-w-sm leading-relaxed">
+          Empowering farmers with AI-driven technology, real-time insights, and smart agricultural solutions for sustainable farming.
+        </p>
+<div class="flex items-center gap-4">
+<a class="text-white/70 hover:text-white transition-colors" href="#"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+<a class="text-white/70 hover:text-white transition-colors" href="#"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+<a class="text-white/70 hover:text-white transition-colors" href="#"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect height="12" width="4" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-4">Features</h3>
+<ul class="space-y-3 text-sm text-white/80">
+<li><a class="hover:text-white transition-colors" href="#">Plant Detection</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Fertilizer Info</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Weather Forecast</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Soil Health</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-4">Resources</h3>
+<ul class="space-y-3 text-sm text-white/80">
+<li><a class="hover:text-white transition-colors" href="#">Seasonal Crops</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Pest Alerts</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Irrigation Guide</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Government Schemes</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-4">Support</h3>
+<ul class="space-y-3 text-sm text-white/80">
+<li><a class="hover:text-white transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact Us</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-2xl mx-auto text-center mb-12 border-t border-white/10 pt-10">
+<h3 class="font-bold text-xl mb-2">Stay Updated</h3>
+<p class="text-white/80 text-sm mb-6">Get the latest farming tips and market updates delivered to your inbox.</p>
+<form class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+<input class="flex-grow px-4 py-3 rounded-lg text-on-surface focus:outline-none focus:ring-2 focus:ring-primary border-none shadow-inner" placeholder="Enter your email" required="" type="email"/>
+<button class="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-lg transition-colors shadow-md whitespace-nowrap" type="submit">Subscribe</button>
+</form>
+</div>
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-sm text-white/60 border-t border-white/10 pt-6">
+<p>© 2026 AgriSmart. All rights reserved. | Built for Smart Farmers 🌱</p>
+<div class="flex items-center gap-4 mt-4 sm:mt-0">
+<span>Made with ❤️ for farmers</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span> Live</span>
+</div>
+</div>
+</footer>
+<!-- END: Site Footer -->
+<!-- Script for rendering charts -->
+<script data-purpose="chart-initialization">
+    document.addEventListener('DOMContentLoaded', function() {
+      // Common Chart styling constants
+      const primaryColor = '#198038'; // Matches Tailwind primary class
+      const primaryLightColor = 'rgba(25, 128, 56, 0.2)';
+      const gridColor = '#e5e7eb';
+      const textColor = '#6b7280';
+
+      // --- Price Trend Line Chart ---
+      const ctxLine = document.getElementById('priceTrendChart').getContext('2d');
+      new Chart(ctxLine, {
+        type: 'line',
+        data: {
+          labels: ['Jan 26', 'Feb 26', 'Mar 26', 'Apr 26', 'May 26', 'Jun 26'],
+          datasets: [{
+            label: 'Price (₹/kg)',
+            data: [44, 54, 37, 53, 42, 45],
+            borderColor: primaryColor,
+            backgroundColor: primaryLightColor,
+            borderWidth: 2,
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: primaryColor,
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            fill: false, // Not filled in the screenshot
+            tension: 0.4 // Smooth curves
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8,
+                boxHeight: 8,
+                color: textColor,
+                font: {
+                  family: "'Inter', sans-serif",
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              titleColor: '#111827',
+              bodyColor: '#374151',
+              borderColor: gridColor,
+              borderWidth: 1,
+              padding: 10,
+              displayColors: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: true,
+                color: gridColor,
+                drawBorder: false,
+              },
+              ticks: {
+                color: textColor,
+                font: { family: "'Inter', sans-serif" }
+              }
+            },
+            y: {
+              min: 0,
+              max: 60,
+              ticks: {
+                stepSize: 10,
+                color: textColor,
+                font: { family: "'Inter', sans-serif" }
+              },
+              grid: {
+                color: gridColor,
+                drawBorder: false,
+              }
+            }
+          }
+        }
+      });
+
+      // --- Trading Volume Bar Chart ---
+      const ctxBar = document.getElementById('tradingVolumeChart').getContext('2d');
+      new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: ['Jan 26', 'Feb 26', 'Mar 26', 'Apr 26', 'May 26', 'Jun 26'],
+          datasets: [{
+            label: 'Trading Volume (tons)',
+            data: [580, 1050, 830, 1310, 600, 1330],
+            backgroundColor: '#22c55e', // Matches bright green in image
+            borderRadius: 4,
+            barThickness: 'flex',
+            maxBarThickness: 40
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                 usePointStyle: false, // Square box like image
+                 boxWidth: 16,
+                 boxHeight: 8,
+                 color: textColor,
+                 font: {
+                  family: "'Inter', sans-serif",
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              titleColor: '#111827',
+              bodyColor: '#374151',
+              borderColor: gridColor,
+              borderWidth: 1,
+              padding: 10,
+              displayColors: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false, // No vertical grid lines on bar chart
+                drawBorder: false
+              },
+              ticks: {
+                color: textColor,
+                font: { family: "'Inter', sans-serif" }
+              }
+            },
+            y: {
+              min: 0,
+              max: 1400,
+              ticks: {
+                stepSize: 200,
+                color: textColor,
+                font: { family: "'Inter', sans-serif" }
+              },
+              grid: {
+                color: gridColor,
+                drawBorder: false,
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body></html>

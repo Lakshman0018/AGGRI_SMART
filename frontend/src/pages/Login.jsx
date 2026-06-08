@@ -82,6 +82,42 @@ const Login = () => {
               </Alert>
             )}
 
+            {/* Quick Demo Accounts Grid */}
+            <div className="bg-emerald-50/70 border border-emerald-100 rounded-xl p-4 mb-2">
+              <p className="text-xs font-semibold text-emerald-800 uppercase tracking-wider mb-2 text-center">
+                ⚡ Quick Demo Accounts
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setFormData({ email: 'demo@agrismart.com', password: 'demo123' })}
+                  className="flex flex-col items-center justify-center p-2 rounded-lg bg-white border border-emerald-200/50 hover:bg-emerald-50 hover:border-emerald-300 transition text-center shadow-xs cursor-pointer"
+                >
+                  <span className="text-lg">🧑‍🌾</span>
+                  <span className="text-[10px] font-bold text-gray-700">Demo Farmer</span>
+                  <span className="text-[8px] text-gray-500">demo@agrismart.com</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFormData({ email: 'john@example.com', password: 'password123' })}
+                  className="flex flex-col items-center justify-center p-2 rounded-lg bg-white border border-emerald-200/50 hover:bg-emerald-50 hover:border-emerald-300 transition text-center shadow-xs cursor-pointer"
+                >
+                  <span className="text-lg">🚜</span>
+                  <span className="text-[10px] font-bold text-gray-700">John Farmer</span>
+                  <span className="text-[8px] text-gray-500">john@example.com</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFormData({ email: 'test@test.com', password: 'test123' })}
+                  className="flex flex-col items-center justify-center p-2 rounded-lg bg-white border border-emerald-200/50 hover:bg-emerald-50 hover:border-emerald-300 transition text-center shadow-xs cursor-pointer"
+                >
+                  <span className="text-lg">🔬</span>
+                  <span className="text-[10px] font-bold text-gray-700">Test User</span>
+                  <span className="text-[8px] text-gray-500">test@test.com</span>
+                </button>
+              </div>
+            </div>
+
             {/* Email Field */}
             <TextField
               fullWidth

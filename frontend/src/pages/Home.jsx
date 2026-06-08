@@ -24,7 +24,7 @@ function Home() {
 
   const cards = [
     { 
-      title: "Plant Detection", 
+      title: "Plant Disease Detection", 
       description: "Detect crop diseases instantly using AI-powered image analysis.", 
       buttonText: "Start Detection", 
       route: "/plant-detection", 
@@ -177,11 +177,11 @@ function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {cards.map((card, index) => (
               <div 
                 key={index}
-                className={`transition-all duration-700 delay-${index * 100} ${
+                className={`h-full transition-all duration-700 delay-${index * 100} ${
                   isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
               >

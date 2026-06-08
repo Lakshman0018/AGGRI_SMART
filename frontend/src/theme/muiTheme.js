@@ -4,85 +4,86 @@ import { createTheme } from '@mui/material/styles';
 const muiTheme = createTheme({
   palette: {
     primary: {
-      main: '#16a34a', // farm-green-600 from Tailwind
-      light: '#22c55e', // farm-green-500
-      dark: '#15803d', // farm-green-700
+      main: '#2e7d32', // Lightened Forest Green
+      light: '#dcfce7', // Lighter container
+      dark: '#1b5e20', // Dark contrast
       contrastText: '#fff',
     },
     secondary: {
-      main: '#10b981', // emerald-500 (complementary green)
-      light: '#34d399', // emerald-400
-      dark: '#059669', // emerald-600
+      main: '#16a34a', // Brighter Leaf Green
+      light: '#bbf7d0', // Lighter container
+      dark: '#14532d', // Dark contrast
       contrastText: '#fff',
     },
     success: {
-      main: '#22c55e', // farm-green-500
-      light: '#4ade80', // farm-green-400
-      dark: '#16a34a', // farm-green-600
+      main: '#2e7d32',
+      light: '#dcfce7',
+      dark: '#1b5e20',
     },
     warning: {
-      main: '#f59e0b', // amber-500
-      light: '#fbbf24', // amber-400
-      dark: '#d97706', // amber-600
+      main: '#45300d', // Stitch tertiary
+      light: '#ffddb1',
+      dark: '#5a431f',
     },
     error: {
-      main: '#ef4444', // red-500
-      light: '#f87171', // red-400
-      dark: '#dc2626', // red-600
+      main: '#ba1a1a', // Stitch error
+      light: '#ffdad6',
+      dark: '#93000a',
     },
     info: {
-      main: '#06b6d4', // cyan-500
-      light: '#22d3ee', // cyan-400
-      dark: '#0891b2', // cyan-600
+      main: '#436746', // Stitch surface-tint
+      light: '#c4edc3',
+      dark: '#2b4e30',
     },
     background: {
-      default: '#f0fdf4', // farm-green-50
+      default: '#f9f9f9', // Stitch background / surface
       paper: '#ffffff',
     },
     text: {
-      primary: '#111827', // gray-900
-      secondary: '#6b7280', // gray-500
+      primary: '#1a1c1c', // Stitch on-surface
+      secondary: '#424841', // Stitch on-surface-variant
     },
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "system-ui", "sans-serif"',
     h1: {
-      fontSize: '2.5rem',
+      fontSize: '32px',
       fontWeight: 700,
       lineHeight: 1.2,
+      letterSpacing: '-0.02em',
     },
     h2: {
-      fontSize: '2rem',
-      fontWeight: 600,
+      fontSize: '24px',
+      fontWeight: 700,
       lineHeight: 1.3,
     },
     h3: {
-      fontSize: '1.75rem',
+      fontSize: '20px',
       fontWeight: 600,
       lineHeight: 1.4,
     },
     h4: {
-      fontSize: '1.5rem',
-      fontWeight: 500,
+      fontSize: '18px',
+      fontWeight: 600,
       lineHeight: 1.4,
     },
     h5: {
-      fontSize: '1.25rem',
+      fontSize: '16px',
       fontWeight: 500,
       lineHeight: 1.5,
     },
     h6: {
-      fontSize: '1rem',
+      fontSize: '14px',
       fontWeight: 500,
       lineHeight: 1.5,
     },
     button: {
       textTransform: 'none',
-      fontWeight: 500,
+      fontWeight: 600,
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 8, // Stitch ROUND_EIGHT / DEFAULT shape
   },
   components: {
     MuiButton: {

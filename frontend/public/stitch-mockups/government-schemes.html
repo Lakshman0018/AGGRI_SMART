@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Government Schemes - AgriSmart</title>
+<!-- Font Setup -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config based on Design System -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#2f5233',
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            surface: {
+              DEFAULT: '#f9f9f9',
+              dim: '#dadada',
+              bright: '#f9f9f9',
+              container: {
+                lowest: '#ffffff',
+                low: '#f3f3f3',
+                DEFAULT: '#ededed',
+                high: '#e7e7e7',
+                highest: '#e1e1e1'
+              }
+            },
+            outline: {
+              DEFAULT: '#727871',
+              variant: '#c1c8be'
+            },
+            text: {
+              primary: '#1a1c19',
+              secondary: '#424840'
+            }
+          },
+          borderRadius: {
+            'core': '0.5rem', // ROUND_EIGHT
+          }
+        }
+      }
+    }
+  </script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style data-purpose="custom-utilities">
+    body {
+      background-color: theme('colors.surface.DEFAULT');
+      color: theme('colors.text.primary');
+    }
+    
+    /* Hide scrollbar for category tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+<!-- BEGIN: Top Navigation -->
+<header class="bg-primary text-white sticky top-0 z-50">
+<div class="max-w-[1920px] mx-auto px-4 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<a class="flex items-center gap-3" href="#">
+<div class="bg-white rounded-full p-1 w-10 h-10 flex items-center justify-center">
+<img alt="AgriSmart Logo" class="rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPq4E4LVk4Qc5xGmi7--C1MjMOvXIJyDqv5mieKM8uSIOcXjLKrwJ09nX3HWrLgbN33fAlmXi_PtN-YMJKs-s7-OrkyWTtJec9GHvcb-kam4k79jjSrcqmXW_19S13Iox_q7kwGUau3SCmeDYRR0yjpAcoIc1rXGZ6H_rDnBfWEjESmw4qImypVltLhozsJ3OTrYnqU94ws_xzsvHSKMvw4JPdb9exulckzEMA0irwCP_Aj2nmSsW-6L4v3KSOkyFHFJdIza8KfYE"/>
+</div>
+<div>
+<h1 class="text-xl font-bold leading-tight">AgriSmart</h1>
+<p class="text-xs text-primary-200">Smart Farming</p>
+</div>
+</a>
+<!-- Main Nav Links -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Home">
+<i class="w-5 h-5" data-lucide="home"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Market">
+<i class="w-5 h-5" data-lucide="shopping-cart"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Crops">
+<i class="w-5 h-5" data-lucide="sprout"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Fertilizers">
+<i class="w-5 h-5" data-lucide="test-tube"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Weather">
+<i class="w-5 h-5" data-lucide="sun"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Pest Control">
+<i class="w-5 h-5" data-lucide="bug"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Soil Health">
+<i class="w-5 h-5" data-lucide="globe"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Irrigation">
+<i class="w-5 h-5" data-lucide="droplets"></i>
+</a>
+<a class="p-2 bg-white/20 rounded-core text-white transition-colors" href="#" title="Schemes">
+<i class="w-5 h-5" data-lucide="landmark"></i>
+</a>
+<a class="p-2 text-white/80 hover:text-white transition-colors" href="#" title="Analytics">
+<i class="w-5 h-5" data-lucide="line-chart"></i>
+</a>
+</nav>
+<!-- Right Actions -->
+<div class="flex items-center gap-4">
+<button class="p-2 text-white/80 hover:text-white">
+<i class="w-5 h-5" data-lucide="shopping-cart"></i>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary-600 border border-primary-400 flex items-center justify-center font-semibold">
+            K
+          </button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: Top Navigation -->
+<!-- BEGIN: Delivery Bar -->
+<div class="bg-primary-500 text-white">
+<div class="max-w-[1920px] mx-auto px-4 lg:px-8 py-2 flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<i class="w-4 h-4" data-lucide="map-pin"></i>
+<div>
+<span class="text-white/80 text-xs block uppercase">Deliver to</span>
+<span class="font-medium">No address set</span>
+</div>
+</div>
+<button class="flex items-center gap-2 hover:text-white/80 transition-colors font-medium">
+<i class="w-4 h-4" data-lucide="pencil"></i>
+        Add Address
+      </button>
+</div>
+</div>
+<!-- END: Delivery Bar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 flex flex-col gap-8">
+<!-- Header Section -->
+<section class="text-center space-y-4">
+<h2 class="text-4xl font-bold text-text-primary">Government <span class="text-primary-600">Schemes</span></h2>
+<p class="text-text-secondary max-w-2xl mx-auto text-lg">
+        Access various government schemes and subsidies designed to support farmers and agricultural development
+      </p>
+</section>
+<!-- Search Section -->
+<section class="w-full">
+<div class="relative max-w-4xl mx-auto">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<i class="h-5 w-5 text-outline" data-lucide="search"></i>
+</div>
+<input class="block w-full pl-11 pr-4 py-4 border border-outline-variant rounded-core leading-5 bg-surface-container-lowest placeholder-text-secondary/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-base shadow-sm transition-shadow hover:shadow-md" placeholder="Search schemes by name, benefits, or eligibility..." type="text"/>
+</div>
+</section>
+<!-- Categories Navigation -->
+<section class="border-b border-outline-variant max-w-4xl mx-auto w-full">
+<div class="flex overflow-x-auto no-scrollbar py-2">
+<nav aria-label="Tabs" class="flex space-x-8 min-w-full justify-between sm:justify-start px-2">
+<a class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<i class="w-4 h-4" data-lucide="blocks"></i>
+            All
+          </a>
+<a class="border-transparent text-text-secondary hover:text-text-primary hover:border-outline-variant whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<i class="w-4 h-4" data-lucide="indian-rupee"></i>
+            Income Support
+          </a>
+<a class="border-transparent text-text-secondary hover:text-text-primary hover:border-outline-variant whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<i class="w-4 h-4" data-lucide="tractor"></i>
+            Crop Insurance
+          </a>
+<a class="border-transparent text-text-secondary hover:text-text-primary hover:border-outline-variant whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<i class="w-4 h-4" data-lucide="landmark"></i>
+            Credit Facility
+          </a>
+<a class="border-transparent text-text-secondary hover:text-text-primary hover:border-outline-variant whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<i class="w-4 h-4" data-lucide="waves"></i>
+            Irrigation
+          </a>
+<a class="border-transparent text-text-secondary hover:text-text-primary hover:border-outline-variant whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<i class="w-4 h-4" data-lucide="store"></i>
+            Marketing
+          </a>
+</nav>
+</div>
+</section>
+<!-- Main Content Area (Loading state placeholder) -->
+<section class="max-w-4xl mx-auto w-full text-text-secondary">
+      Loading schemes...
+    </section>
+<!-- How to Apply Guide -->
+<section class="max-w-4xl mx-auto w-full">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
+<div class="flex items-center gap-3 mb-8">
+<i class="w-6 h-6 text-text-primary" data-lucide="clipboard-list"></i>
+<h3 class="text-xl font-bold text-text-primary">How to Apply for Government Schemes</h3>
+</div>
+<div class="space-y-6 relative before:absolute before:inset-y-0 before:left-[15px] before:w-0.5 before:bg-outline-variant/50">
+<!-- Step 1 -->
+<div class="relative flex items-start group">
+<div class="absolute left-0 w-8 h-8 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-sm z-10">
+              1
+            </div>
+<div class="ml-12 pt-1">
+<h4 class="text-base font-semibold text-text-primary">Check Eligibility</h4>
+<p class="text-sm text-text-secondary mt-1">Verify you meet all eligibility criteria</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex items-start group">
+<div class="absolute left-0 w-8 h-8 rounded-full bg-surface-dim text-text-secondary flex items-center justify-center font-bold text-sm z-10 border-2 border-surface-container-lowest">
+              2
+            </div>
+<div class="ml-12 pt-1">
+<h4 class="text-base font-semibold text-text-primary">Gather Documents</h4>
+<p class="text-sm text-text-secondary mt-1">Collect all required documents</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex items-start group">
+<div class="absolute left-0 w-8 h-8 rounded-full bg-surface-dim text-text-secondary flex items-center justify-center font-bold text-sm z-10 border-2 border-surface-container-lowest">
+              3
+            </div>
+<div class="ml-12 pt-1">
+<h4 class="text-base font-semibold text-text-primary">Fill Application</h4>
+<p class="text-sm text-text-secondary mt-1">Complete the application form</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex items-start group">
+<div class="absolute left-0 w-8 h-8 rounded-full bg-surface-dim text-text-secondary flex items-center justify-center font-bold text-sm z-10 border-2 border-surface-container-lowest">
+              4
+            </div>
+<div class="ml-12 pt-1">
+<h4 class="text-base font-semibold text-text-primary">Submit Application</h4>
+<p class="text-sm text-text-secondary mt-1">Submit through online portal or office</p>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="relative flex items-start group">
+<div class="absolute left-0 w-8 h-8 rounded-full bg-surface-dim text-text-secondary flex items-center justify-center font-bold text-sm z-10 border-2 border-surface-container-lowest">
+              5
+            </div>
+<div class="ml-12 pt-1">
+<h4 class="text-base font-semibold text-text-primary">Track Status</h4>
+<p class="text-sm text-text-secondary mt-1">Monitor your application status</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Important Links -->
+<section class="max-w-4xl mx-auto w-full pb-8">
+<div class="bg-primary-50/50 rounded-xl border border-primary-100 p-6">
+<div class="flex items-start gap-3 mb-4">
+<i class="w-5 h-5 text-primary-600 mt-0.5" data-lucide="info"></i>
+<div>
+<h4 class="text-base font-semibold text-primary-800">Important Links:</h4>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 ml-8">
+<a class="inline-flex items-center px-4 py-2 border border-primary-300 rounded-core text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 transition-colors" href="#">
+            PM-KISAN Portal
+          </a>
+<a class="inline-flex items-center px-4 py-2 border border-primary-300 rounded-core text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 transition-colors" href="#">
+            PMFBY Portal
+          </a>
+<a class="inline-flex items-center px-4 py-2 border border-primary-300 rounded-core text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 transition-colors" href="#">
+            e-NAM Portal
+          </a>
+<a class="inline-flex items-center px-4 py-2 border border-primary-300 rounded-core text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 transition-colors" href="#">
+            All Schemes
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- END: Main Content Area -->
+<!-- BEGIN: Footer -->
+<footer class="bg-primary-900 text-white pt-16 pb-8 border-t border-primary-800">
+<div class="max-w-[1920px] mx-auto px-4 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+<!-- Brand Info -->
+<div class="lg:col-span-2 space-y-4">
+<a class="flex items-center gap-3" href="#">
+<div class="bg-white rounded-full p-1 w-10 h-10 flex items-center justify-center">
+<img alt="AgriSmart Logo" class="rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxCvlDgFbC9jqM7RMA2yfIu51l41d_tS2au_L_5YWV3QrzAk4LJ3zcetco0v22GroOjhLI0G1wILSDxpkooOsvHEhiumRxSoPG39-Qi4af4RSO1NQPV02v7o1cYcrzDCaXIT2ShPM6QxWPz2MqnWnlz9HXv9Asa4jDzqac_D9uBCLFKgXfS2EwHBiHyjak2OhcQhJANYfj1zFamZHd0x89ceahtQNS7LDp--xFavJP-B0QxkcEBA4-sYxULGNTc9GHI4QtPJyWvCc"/>
+</div>
+<div>
+<span class="text-xl font-bold block leading-tight">AgriSmart</span>
+<span class="text-sm text-primary-200">Smart Farming Solutions</span>
+</div>
+</a>
+<p class="text-primary-100/80 text-sm max-w-sm mt-4 leading-relaxed">
+            Empowering farmers with AI-driven technology, real-time insights, and smart agricultural solutions for sustainable farming.
+          </p>
+<div class="flex gap-4 pt-2">
+<a class="text-white/70 hover:text-white transition-colors" href="#">
+<i class="w-5 h-5" data-lucide="facebook"></i>
+<span class="sr-only">Facebook</span>
+</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">
+<i class="w-5 h-5" data-lucide="twitter"></i>
+<span class="sr-only">Twitter</span>
+</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">
+<i class="w-5 h-5" data-lucide="linkedin"></i>
+<span class="sr-only">LinkedIn</span>
+</a>
+</div>
+</div>
+<!-- Features Links -->
+<div>
+<h4 class="text-lg font-semibold mb-4 text-white">Features</h4>
+<ul class="space-y-3">
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Plant Detection</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Fertilizer Info</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Weather Forecast</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Soil Health</a></li>
+</ul>
+</div>
+<!-- Resources Links -->
+<div>
+<h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+<ul class="space-y-3">
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Seasonal Crops</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Pest Alerts</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Irrigation Guide</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Government Schemes</a></li>
+</ul>
+</div>
+<!-- Support Links -->
+<div>
+<h4 class="text-lg font-semibold mb-4 text-white">Support</h4>
+<ul class="space-y-3">
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Help Center</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Contact Us</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-sm text-primary-100/80 hover:text-white transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<!-- Newsletter & Copyright -->
+<div class="border-t border-primary-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="w-full md:w-auto text-center md:text-left space-y-2">
+<h4 class="text-base font-semibold text-white">Stay Updated</h4>
+<p class="text-sm text-primary-100/80 mb-4 md:mb-0 max-w-md">Get the latest farming tips and market updates delivered to your inbox.</p>
+</div>
+<form class="flex w-full md:w-auto gap-2 max-w-md">
+<input class="w-full px-4 py-2 bg-white text-text-primary rounded-core focus:outline-none focus:ring-2 focus:ring-primary-400 text-sm border-none" placeholder="Enter your email" required="" type="email"/>
+<button class="px-6 py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-core font-medium transition-colors text-sm whitespace-nowrap" type="submit">
+            Subscribe
+          </button>
+</form>
+</div>
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-primary-200 border-t border-primary-800/50 pt-6">
+<p>© 2026 AgriSmart. All rights reserved. | Built for Smart Farmers 🌱</p>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1">Made with <span class="text-red-400">♥</span> for farmers</span>
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-400 block"></span> Live</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<!-- Initialize Lucide Icons -->
+<script data-purpose="icon-initialization">
+    lucide.createIcons();
+  </script>
+</body></html>

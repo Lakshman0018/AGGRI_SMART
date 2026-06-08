@@ -11,14 +11,17 @@ function CustomCard({ title, description, buttonText, route, image, icon, badge,
     }
   };
 
-
   return (
     <div
-      className={`group relative overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 ${
+      className={`group relative overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl cursor-pointer h-full flex flex-col justify-between ${
         gradient ? 'card-gradient' : 'card-modern'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
+      style={{
+        border: isHovered ? '1.5px solid rgba(34, 197, 94, 0.35)' : undefined,
+      }}
     >
       {/* Badge */}
       {badge && (
@@ -34,45 +37,51 @@ function CustomCard({ title, description, buttonText, route, image, icon, badge,
         </div>
       )}
 
-      {/* Image/Icon Section */}
-      <div className="relative mb-4 flex justify-center">
-        <div className={`relative transition-all duration-300 ${
-          isHovered ? 'scale-110 rotate-3' : 'scale-100 rotate-0'
-        }`}>
-          {image && (
-            <img
-              src={image}
-              alt={title}
-              className="w-16 h-16 object-contain filter drop-shadow-lg"
-            />
-          )}
-          {icon && (
-            <div className="w-16 h-16 flex items-center justify-center text-4xl">
-              {icon}
+      {/* Light hover glow (behind content, very subtle) */}
+      <div className={`absolute inset-0 bg-gradient-to-br from-farm-green-400/5 to-farm-green-600/5 transition-opacity duration-300 pointer-events-none ${
+        isHovered ? 'opacity-100' : 'opacity-0'
+      }`} />
+
+      {/* Content flex wrapper */}
+      <div className="flex flex-col flex-grow justify-between relative z-10 h-full">
+        <div className="flex flex-col items-center flex-grow">
+          {/* Image/Icon Section */}
+          <div className="relative mb-4 flex justify-center">
+            <div className={`relative transition-all duration-300 ${
+              isHovered ? 'scale-110 rotate-3' : 'scale-100 rotate-0'
+            }`}>
+              {image && (
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-16 h-16 object-contain filter drop-shadow-lg"
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+              )}
+              {icon && (
+                <div className="w-16 h-16 flex items-center justify-center text-4xl">
+                  {icon}
+                </div>
+              )}
             </div>
-          )}
-          {/* Hover Glow Effect */}
-          <div className={`absolute inset-0 rounded-full transition-opacity duration-300 ${
-            isHovered ? 'opacity-20' : 'opacity-0'
-          } bg-farm-green-400 blur-xl`}></div>
+          </div>
+
+          {/* Text Content */}
+          <div className="text-center space-y-3 flex-grow flex flex-col justify-start">
+            <h3 className="text-xl font-display font-semibold text-gray-800 group-hover:text-farm-green-700 transition-colors duration-300">
+              {title}
+            </h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {description}
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="text-center space-y-3">
-        <h3 className="text-xl font-display font-semibold text-gray-800 group-hover:text-farm-green-700 transition-colors duration-300">
-          {title}
-        </h3>
-
-        <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-          {description}
-        </p>
-
-        {/* Button */}
-        <div className="pt-2">
+        {/* Button Section */}
+        <div className="pt-4 mt-auto w-full">
           <button
-            onClick={handleClick}
-            className="btn-primary text-sm px-6 py-2 w-full group-hover:shadow-lg group-hover:shadow-farm-green-500/25 transition-all duration-300"
+            onClick={(e) => { e.stopPropagation(); handleClick(); }}
+            className="btn-primary text-sm px-6 py-2 w-full group-hover:shadow-lg transition-all duration-300"
           >
             <span className="flex items-center justify-center space-x-2">
               <span>{buttonText}</span>
@@ -88,20 +97,6 @@ function CustomCard({ title, description, buttonText, route, image, icon, badge,
               </svg>
             </span>
           </button>
-        </div>
-      </div>
-
-      {/* Hover Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-br from-farm-green-500/5 to-farm-green-600/5 transition-opacity duration-300 ${
-        isHovered ? 'opacity-100' : 'opacity-0'
-      }`}></div>
-
-      {/* Animated Border */}
-      <div className={`absolute inset-0 rounded-2xl transition-opacity duration-300 ${
-        isHovered ? 'opacity-100' : 'opacity-0'
-      }`}>
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-farm-green-400 via-farm-green-500 to-farm-green-600 p-0.5">
-          <div className="w-full h-full bg-white rounded-2xl"></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriSmart - Marketplace Product Listing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#147A3A",
+            "primary-light": "#E8F5EE",
+            "background-light": "#F8FAF9",
+            "background-dark": "#121212",
+            "surface-light": "#FFFFFF",
+            "surface-dark": "#1E1E1E",
+            "text-primary-light": "#1A1A1A",
+            "text-primary-dark": "#E5E5E5",
+            "text-secondary-light": "#666666",
+            "text-secondary-dark": "#A3A3A3",
+            "border-light": "#E5E7EB",
+            "border-dark": "#333333",
+          },
+          fontFamily: {
+            display: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "0.75rem",
+            xl: "1rem",
+            "2xl": "1.5rem",
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark min-h-screen flex flex-col transition-colors duration-300">
+<header class="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center">
+<a class="flex items-center gap-2" href="#">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-icons text-xl">eco</span>
+</div>
+<div>
+<span class="font-bold text-xl leading-none block">AgriSmart</span>
+<span class="text-[10px] text-text-secondary-light dark:text-text-secondary-dark leading-none">Smart Farming</span>
+</div>
+</a>
+</div>
+<nav class="hidden md:flex items-center space-x-6">
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">home</span>
+</a>
+<a class="text-primary dark:text-primary flex flex-col items-center gap-1 group relative" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">storefront</span>
+<span class="absolute -bottom-3 w-1 h-1 bg-primary rounded-full"></span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">yard</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">science</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">wb_sunny</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">grass</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">public</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">bug_report</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">water_drop</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">account_balance</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">trending_up</span>
+</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors relative">
+<span class="material-icons">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+</button>
+<div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-sm font-medium">
+            K
+          </div>
+</div>
+</div>
+</div>
+</header>
+<div class="bg-primary text-white py-2">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-sm">
+<div class="flex items-center gap-2">
+<span class="material-icons text-base opacity-80">location_on</span>
+<div>
+<span class="opacity-80 text-xs block leading-tight">DELIVER TO</span>
+<span class="font-medium leading-tight">No address set</span>
+</div>
+</div>
+<button class="flex items-center gap-1 hover:underline text-sm font-medium">
+<span class="material-icons text-base">edit</span>
+        Add Address
+      </button>
+</div>
+</div>
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col md:flex-row gap-8">
+<aside class="w-full md:w-64 flex-shrink-0 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm">
+<h3 class="font-semibold mb-4 text-lg">Categories</h3>
+<ul class="space-y-3">
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">All Categories</span>
+</label>
+</li>
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">Vegetables</span>
+</label>
+</li>
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">Fruits</span>
+</label>
+</li>
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">Grains &amp; Pulses</span>
+</label>
+</li>
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">Dairy &amp; Eggs</span>
+</label>
+</li>
+</ul>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm">
+<h3 class="font-semibold mb-4 text-lg">Price Range</h3>
+<div class="space-y-4">
+<input class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary" max="1000" min="0" type="range" value="500"/>
+<div class="flex justify-between text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span>₹0</span>
+<span>₹1000+</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">₹</span>
+<input class="w-full pl-7 pr-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Min" type="number"/>
+</div>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">-</span>
+<div class="relative flex-1">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">₹</span>
+<input class="w-full pl-7 pr-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Max" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm">
+<h3 class="font-semibold mb-4 text-lg">Certifications</h3>
+<ul class="space-y-3">
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark flex items-center gap-2">
+                100% Organic <span class="material-icons text-green-500 text-sm">verified</span>
+</span>
+</label>
+</li>
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">Pesticide Free</span>
+</label>
+</li>
+<li>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="form-checkbox h-5 w-5 text-primary rounded border-gray-300 dark:border-gray-600 focus:ring-primary dark:bg-surface-dark" type="checkbox"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">Local Farm</span>
+</label>
+</li>
+</ul>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-medium transition-colors">
+        Apply Filters
+      </button>
+</aside>
+<div class="flex-1 flex flex-col gap-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-4 border border-border-light dark:border-border-dark shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="relative w-full sm:w-96">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary text-sm transition-colors" placeholder="Search fresh produce..." type="text"/>
+</div>
+<div class="flex items-center justify-between w-full sm:w-auto gap-4">
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark hidden sm:inline-block">124 Products</span>
+<div class="flex items-center gap-2">
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Sort by:</span>
+<select class="bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg py-2 pl-3 pr-8 text-sm focus:ring-primary focus:border-primary cursor-pointer">
+<option>Relevance</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest Arrivals</option>
+<option>Highest Rated</option>
+</select>
+</div>
+<button class="md:hidden flex items-center justify-center p-2 border border-border-light dark:border-border-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-50 dark:hover:bg-gray-800">
+<span class="material-icons text-xl">filter_list</span>
+</button>
+</div>
+</div>
+<div class="flex justify-end mb-2">
+<button class="text-sm font-medium text-primary hover:underline flex items-center gap-1">
+<span class="material-icons text-base">compare_arrows</span> Quick Compare (0)
+         </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow group flex flex-col relative">
+<div class="absolute top-3 left-3 z-10 flex flex-col gap-2">
+<span class="bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Organic</span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 bg-white/80 dark:bg-black/50 backdrop-blur rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+</div>
+<div class="aspect-square bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+<img alt="Fresh Organic Potatoes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABRDbHn4q3FOiDYhMtM4RxN8gEIbzbqQis9IAggmlzhc-wWurr6Q_xi2atSSAabKAoV55A3h7kc2Cea2QK_8_-5gGJvxV2j4wEAg4z87-A9jtYN0SSNwqqCcPrNnruuJ71nnvb2Q9K3Zd5gkaJhwjBr6NzTV38Kcy_VDtga3awy3YeplJexKL2PX1zfMCFzT99Szlmc8y2fLLqOK_jpqryY8bRlAGl7xTDFGDvN9Qmrz_szlpc3mjsNlcsoC-7sArnQrX4C54FUrA"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-lg line-clamp-1"><a class="hover:text-primary transition-colors" href="#">Fresh Organic Potatoes</a></h3>
+</div>
+<div class="flex items-center gap-1 mb-2 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-icons text-[14px] text-yellow-400">star</span>
+<span class="font-medium text-text-primary-light dark:text-text-primary-dark">4.8</span>
+<span>(120)</span>
+<span class="mx-1">•</span>
+<span class="material-icons text-[14px]">location_on</span>
+<span>Punjab Farms</span>
+</div>
+<div class="mt-auto pt-4 flex items-end justify-between">
+<div>
+<span class="text-xl font-bold text-primary">₹45</span>
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">/ kg</span>
+</div>
+<button class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-colors">
+<span class="material-icons">add_shopping_cart</span>
+</button>
+</div>
+<div class="mt-3 pt-3 border-t border-border-light dark:border-border-dark">
+<label class="flex items-center gap-2 cursor-pointer text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors">
+<input class="form-checkbox h-4 w-4 text-primary rounded border-gray-300" type="checkbox"/>
+                   Compare
+                </label>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow group flex flex-col relative">
+<div class="absolute top-3 left-3 z-10 flex flex-col gap-2">
+<span class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Fresh Picked</span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 bg-white/80 dark:bg-black/50 backdrop-blur rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+</div>
+<div class="aspect-square bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+<img alt="Ripe Red Tomatoes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFiYhh2-ykPAzYqs4VmumU6gliXIaEDHB3bsI5pekxTr93ZOWpI1GwErvezjvnt2HI6hEJ0d2ZzXuGBXlgRLqbb9WnOoDmHiojo4Bbmy9bm8UuexluTUkpoXQk-Pxk0v7M4e45Ktm6plehtIEun2TFfd9lVBYaR-mnk3YOBIoYaFqQb65mBo_fNpcVydMuuyEyXsrGFN_2KOZoEoEoUdiCd1uOWpspP4tUMKmE15SNOReMI2MPJi51pM9E3VZvJkAYOb-7CFeoaxg"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-lg line-clamp-1"><a class="hover:text-primary transition-colors" href="#">Ripe Red Tomatoes</a></h3>
+</div>
+<div class="flex items-center gap-1 mb-2 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-icons text-[14px] text-yellow-400">star</span>
+<span class="font-medium text-text-primary-light dark:text-text-primary-dark">4.5</span>
+<span>(85)</span>
+<span class="mx-1">•</span>
+<span class="material-icons text-[14px]">location_on</span>
+<span>Green Valley</span>
+</div>
+<div class="mt-auto pt-4 flex items-end justify-between">
+<div>
+<span class="text-xl font-bold text-primary">₹30</span>
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">/ kg</span>
+</div>
+<button class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-colors">
+<span class="material-icons">add_shopping_cart</span>
+</button>
+</div>
+<div class="mt-3 pt-3 border-t border-border-light dark:border-border-dark">
+<label class="flex items-center gap-2 cursor-pointer text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors">
+<input class="form-checkbox h-4 w-4 text-primary rounded border-gray-300" type="checkbox"/>
+                   Compare
+                </label>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow group flex flex-col relative">
+<div class="absolute top-3 left-3 z-10 flex flex-col gap-2">
+<span class="bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Organic</span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 bg-white/80 dark:bg-black/50 backdrop-blur rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+</div>
+<div class="aspect-square bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+<img alt="Fresh Spinach Bundle" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_XJN-4KuevABJud6VfSBQNqa3SojHjHtqReD4EU4BInxUbxs45plJnrUuQ1HTMiEYIIzwFDR6YNN_NQi6q9qPw3dlaUBzOawwezPYvTTKFyrQwNKc6nK3_760QkcBBbr9iWrefQNZ-JalSbNgEN3BmrN5dcrxsjQ_zCnBIBTK4X4NWAsWuik4lCfZ3UDbF8Jr2EsZ9BFBFLrq5LZexMdN2rZZQJv8PCJww6Liu4UmGtsVXjp9qyBr63dSllED4Q4sHFkgnM2q_lI"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-lg line-clamp-1"><a class="hover:text-primary transition-colors" href="#">Fresh Spinach Bundle</a></h3>
+</div>
+<div class="flex items-center gap-1 mb-2 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-icons text-[14px] text-yellow-400">star</span>
+<span class="font-medium text-text-primary-light dark:text-text-primary-dark">4.9</span>
+<span>(210)</span>
+<span class="mx-1">•</span>
+<span class="material-icons text-[14px]">location_on</span>
+<span>Local Organics</span>
+</div>
+<div class="mt-auto pt-4 flex items-end justify-between">
+<div>
+<span class="text-xl font-bold text-primary">₹25</span>
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">/ bunch</span>
+</div>
+<button class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-colors">
+<span class="material-icons">add_shopping_cart</span>
+</button>
+</div>
+<div class="mt-3 pt-3 border-t border-border-light dark:border-border-dark">
+<label class="flex items-center gap-2 cursor-pointer text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors">
+<input class="form-checkbox h-4 w-4 text-primary rounded border-gray-300" type="checkbox"/>
+                   Compare
+                </label>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow group flex flex-col relative">
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 bg-white/80 dark:bg-black/50 backdrop-blur rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+</div>
+<div class="aspect-square bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+<img alt="Crunchy Carrots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbN2HWy1iJDiQzhcDYOZb-C_zDq5qKZogorWVu7GlBzaJLWa4_noKQn5qZbI97oqVCoXP5jNG4ZFUTuHKpsbYoZXHajs-smYDrygrdtjvJ8W-5KuxvVhRdFf8wU7YJC3x59M_gBhEV9JVbGZ9kFOtZAm9Fd8yO7w8HcBtrUyE26igAekCSWmOJNWtnvdn1O8p8PjktQpYTtm56U_2uQXvEGvK5Q77_ngghzWBzv2AVkUeb_a_yZ9CnGZImYw2OaoHNxRqVFt6xbP4"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-lg line-clamp-1"><a class="hover:text-primary transition-colors" href="#">Crunchy Carrots</a></h3>
+</div>
+<div class="flex items-center gap-1 mb-2 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-icons text-[14px] text-yellow-400">star</span>
+<span class="font-medium text-text-primary-light dark:text-text-primary-dark">4.6</span>
+<span>(92)</span>
+<span class="mx-1">•</span>
+<span class="material-icons text-[14px]">location_on</span>
+<span>Sunny Fields</span>
+</div>
+<div class="mt-auto pt-4 flex items-end justify-between">
+<div>
+<span class="text-xl font-bold text-primary">₹50</span>
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">/ kg</span>
+</div>
+<button class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-colors">
+<span class="material-icons">add_shopping_cart</span>
+</button>
+</div>
+<div class="mt-3 pt-3 border-t border-border-light dark:border-border-dark">
+<label class="flex items-center gap-2 cursor-pointer text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors">
+<input class="form-checkbox h-4 w-4 text-primary rounded border-gray-300" type="checkbox"/>
+                   Compare
+                </label>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-8">
+<nav class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50">
+<span class="material-icons">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-medium">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-50 dark:hover:bg-gray-800 font-medium transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-50 dark:hover:bg-gray-800 font-medium transition-colors">3</button>
+<span class="px-2 text-text-secondary-light dark:text-text-secondary-dark">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-50 dark:hover:bg-gray-800 font-medium transition-colors">8</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-50 dark:hover:bg-gray-800">
+<span class="material-icons">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</main>
+
+</body></html>

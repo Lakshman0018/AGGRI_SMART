@@ -26,7 +26,7 @@ function Footer() {
 
   const footerLinks = {
     'Features': [
-      { name: 'Plant Detection', path: '/plant-detection' },
+      { name: 'Plant Disease Detection', path: '/plant-detection' },
       { name: 'Fertilizer Info', path: '/fertilizer-info' },
       { name: 'Weather Forecast', path: '/weather-forecast' },
       { name: 'Soil Health', path: '/soil-health' },

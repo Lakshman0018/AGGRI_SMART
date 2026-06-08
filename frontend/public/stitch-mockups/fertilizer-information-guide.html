@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fertilizer Info - AgriSmart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#005313",
+                        "tertiary": "#45300d",
+                        "surface-dim": "#dadada",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed": "#002204",
+                        "outline-variant": "#c2c8be",
+                        "on-tertiary-container": "#d6b587",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#9dc49d",
+                        "on-error": "#ffffff",
+                        "outline": "#727970",
+                        "inverse-surface": "#2f3131",
+                        "surface-tint": "#436746",
+                        "primary-container": "#2f5233",
+                        "on-primary-fixed": "#002108",
+                        "inverse-on-surface": "#f1f1f1",
+                        "tertiary-fixed": "#ffddb1",
+                        "tertiary-container": "#5e4622",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-primary": "#a9d1a8",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e3c193",
+                        "surface-container-high": "#e8e8e8",
+                        "on-tertiary-fixed": "#291800",
+                        "on-surface-variant": "#424841",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "background": "#f9f9f9",
+                        "primary-fixed-dim": "#a9d1a8",
+                        "on-secondary-container": "#00731e",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#78dc77",
+                        "primary": "#183b1e",
+                        "on-tertiary-fixed-variant": "#5a431f",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary-fixed-variant": "#2b4e30",
+                        "primary-fixed": "#c4edc3",
+                        "surface-variant": "#e2e2e2",
+                        "on-surface": "#1a1c1c",
+                        "secondary": "#006e1c",
+                        "secondary-fixed": "#94f990",
+                        "secondary-container": "#91f78e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "lg": "48px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md-mobile": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md-mobile": ["22px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex bg-surface dark:bg-surface-dim text-primary dark:text-primary-fixed-dim font-body-md h-full w-64 fixed left-0 top-0 border-r border-outline-variant shadow-sm flex-col py-md space-y-base z-50">
+<div class="px-md pb-md border-b border-outline-variant mb-4">
+<h1 class="font-headline-sm text-headline-sm text-primary">AgriSmart</h1>
+<p class="text-on-surface-variant font-label-md mt-1">Precision Farming</p>
+</div>
+<ul class="flex flex-col flex-grow">
+<li>
+<a class="flex items-center px-md py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" style="font-variation-settings: 'FILL' 0;">home</span>
+                    Home
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" style="font-variation-settings: 'FILL' 0;">storefront</span>
+                    Marketplace
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" style="font-variation-settings: 'FILL' 0;">agriculture</span>
+                    My Farm
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-3 bg-primary-container text-on-primary-container font-bold rounded-r-full hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" style="font-variation-settings: 'FILL' 1;">psychiatry</span>
+                    Crop Advisor
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:bg-surface-container-low transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-sm" style="font-variation-settings: 'FILL' 0;">person</span>
+                    Account
+                </a>
+</li>
+</ul>
+<div class="px-md mt-auto pt-4 border-t border-outline-variant">
+<button class="w-full bg-secondary text-on-secondary rounded-lg py-2 font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
+                Get Expert Advice
+            </button>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<nav class="md:hidden bg-primary dark:bg-surface-container-highest text-on-primary dark:text-on-surface docked full-width top-0 shadow-sm shadow-md flex justify-between items-center w-full px-margin-mobile h-16 sticky z-50">
+<h1 class="text-headline-md font-headline-md font-bold text-on-primary dark:text-primary-fixed">AgriSmart</h1>
+<div class="flex space-x-sm">
+<button class="p-2 hover:bg-primary-container/20 transition-colors scale-95 active:scale-90 transition-transform rounded-full">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-primary-container/20 transition-colors scale-95 active:scale-90 transition-transform rounded-full">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-surface-container-low min-h-screen">
+<!-- Header Section -->
+<header class="mb-lg">
+<h2 class="font-display-lg text-display-lg text-primary mb-2">Fertilizer Information</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Comprehensive guidance on selecting, calculating, and applying the right nutrients for optimal crop yield and soil health.</p>
+</header>
+<!-- Search & Filter Bar -->
+<section class="bg-surface rounded-xl p-md shadow-sm mb-lg border border-surface-variant flex flex-col md:flex-row gap-4 items-center">
+<div class="relative w-full md:w-1/2">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant bg-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-md text-on-surface" placeholder="Search fertilizers (e.g., Urea, DAP, Compost)..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-2 w-full md:w-auto">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-md hover:bg-primary-fixed transition-colors border border-transparent">All</button>
+<button class="bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-md hover:bg-surface-container-high transition-colors border border-outline-variant">Nitrogenous</button>
+<button class="bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-md hover:bg-surface-container-high transition-colors border border-outline-variant">Phosphatic</button>
+<button class="bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-md hover:bg-surface-container-high transition-colors border border-outline-variant">Potassic</button>
+<button class="bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-md hover:bg-surface-container-high transition-colors border border-outline-variant">Organic</button>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Content Area: Fertilizer Guide (Span 8) -->
+<div class="md:col-span-8 space-y-gutter">
+<h3 class="font-headline-md text-headline-md text-on-surface border-b border-surface-variant pb-2">Fertilizer Guide</h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Card 1 -->
+<article class="bg-surface rounded-xl p-md shadow-sm border border-surface-variant hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">science</span>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Urea (46-0-0)</h4>
+<span class="text-label-md font-label-md text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Nitrogenous</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">High nitrogen content fertilizer essential for promoting vigorous leaf and stem growth. Best applied during active vegetative stages.</p>
+<div class="space-y-3 mb-4">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface">Nitrogen (N)</span>
+<span class="text-primary font-bold">46%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 46%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center text-sm text-on-surface-variant mt-auto pt-4 border-t border-surface-variant">
+<span class="material-symbols-outlined mr-1 text-base">grass</span>
+<span>Best for: Corn, Wheat, Leafy Greens</span>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface rounded-xl p-md shadow-sm border border-surface-variant hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-tertiary" style="font-variation-settings: 'FILL' 1;">compost</span>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-on-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">psychiatry</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">DAP (18-46-0)</h4>
+<span class="text-label-md font-label-md text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Phosphatic</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Diammonium Phosphate provides excellent phosphorus for root development and early plant vigor, along with starter nitrogen.</p>
+<div class="space-y-3 mb-4">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface">Phosphorus (P)</span>
+<span class="text-tertiary font-bold">46%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-tertiary h-2 rounded-full" style="width: 46%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface">Nitrogen (N)</span>
+<span class="text-primary font-bold">18%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 18%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center text-sm text-on-surface-variant mt-auto pt-4 border-t border-surface-variant">
+<span class="material-symbols-outlined mr-1 text-base">grass</span>
+<span>Best for: Legumes, Root Crops, Basal Dose</span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface rounded-xl p-md shadow-sm border border-surface-variant hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-secondary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-on-primary-fixed-variant" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">MOP (0-0-60)</h4>
+<span class="text-label-md font-label-md text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Potassic</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Muriate of Potash is vital for improving crop quality, disease resistance, and water use efficiency. Crucial for fruit and grain formation.</p>
+<div class="space-y-3 mb-4">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface">Potassium (K)</span>
+<span class="text-secondary font-bold">60%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center text-sm text-on-surface-variant mt-auto pt-4 border-t border-surface-variant">
+<span class="material-symbols-outlined mr-1 text-base">grass</span>
+<span>Best for: Potatoes, Tomatoes, Fruit Trees</span>
+</div>
+</article>
+</div>
+</div>
+<!-- Sidebar Area: Tools & Visuals (Span 4) -->
+<aside class="md:col-span-4 space-y-gutter">
+<!-- Calculator Widget -->
+<div class="bg-surface rounded-xl p-md shadow-sm border border-surface-variant">
+<div class="flex items-center mb-4 pb-3 border-b border-surface-variant">
+<span class="material-symbols-outlined text-primary mr-2">calculate</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fertilizer Calculator</h3>
+</div>
+<form class="space-y-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Crop Type</label>
+<select class="w-full rounded-lg border border-outline-variant bg-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none py-2 px-3 text-body-md">
+<option>Wheat</option>
+<option>Corn</option>
+<option>Rice</option>
+<option>Soybean</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Field Size (Hectares)</label>
+<input class="w-full rounded-lg border border-outline-variant bg-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none py-2 px-3 text-body-md" placeholder="e.g. 5" type="number"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Target Yield (Tons/Ha)</label>
+<input class="w-full rounded-lg border border-outline-variant bg-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none py-2 px-3 text-body-md" placeholder="e.g. 4" type="number"/>
+</div>
+<button class="w-full bg-primary text-on-primary rounded-lg py-2 mt-2 font-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm" type="button">
+                            Calculate Dose
+                        </button>
+</form>
+</div>
+<!-- Featured Image / Promo -->
+<div class="rounded-xl overflow-hidden shadow-sm relative h-64 border border-outline-variant">
+<img alt="" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfJuS_VGS9VxnkoDoez3M5o9Zop3yXrWbQT95F04xLwwTUdkehiK4uqV72asx3ZZZ8aPeTq95YW6zTPhwTufH8Z-XjKZyXrM2_uMNXUn-ugC-Z7MUhwT4qxf-T41j9JWSSHFzv6ZFcO1U_cE1d5pEPtLWomc5n3J186PRUcEoArKy_5p93ueDhcNsnUutXUJm2Du_fBW2KbSBaM0RWv74hhvGtEXpRIpVa4LtPRnPXBjqVyHUNgtGrEAM5lh8Azv_jYdO0Fzh6D6Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-md">
+<h4 class="font-headline-sm text-headline-sm text-white mb-1">Smart Application</h4>
+<p class="font-body-md text-body-md text-white/80">Learn the best practices for applying fertilizer to maximize efficiency and minimize runoff.</p>
+<a class="inline-flex items-center text-secondary-fixed mt-2 font-label-md hover:underline" href="#">
+                            Read Guide <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Methods Quick Ref -->
+<div class="bg-surface rounded-xl p-md shadow-sm border border-surface-variant">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Application Methods</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-3 bg-primary-fixed p-1 rounded">scatter_plot</span>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface">Broadcasting</h5>
+<p class="text-xs text-on-surface-variant">Spreading evenly over the entire field surface.</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-tertiary mr-3 bg-tertiary-fixed p-1 rounded">linear_scale</span>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface">Placement</h5>
+<p class="text-xs text-on-surface-variant">Applying in bands or strips near the root zone.</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-secondary mr-3 bg-secondary-fixed p-1 rounded">opacity</span>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface">Foliar Spray</h5>
+<p class="text-xs text-on-surface-variant">Spraying dissolved fertilizer directly onto leaves.</p>
+</div>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden bg-primary dark:bg-surface-container-highest text-on-primary dark:text-on-surface shadow-sm shadow-md flex justify-between items-center w-full px-margin-mobile h-16 fixed bottom-0 z-50">
+<a class="flex flex-col items-center justify-center w-full h-full text-on-primary/80 hover:text-on-primary hover:bg-primary-container/20 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-md text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full bg-secondary-container text-on-secondary-container rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychiatry</span>
+<span class="font-label-md text-[10px]">Advisor</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-primary/80 hover:text-on-primary hover:bg-primary-container/20 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">agriculture</span>
+<span class="font-label-md text-[10px]">Farm</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-primary/80 hover:text-on-primary hover:bg-primary-container/20 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-md text-[10px]">Account</span>
+</a>
+</nav>
+</body></html>

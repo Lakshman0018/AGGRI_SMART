@@ -27,7 +27,7 @@ function Navbar() {
   const navItems = [
     { path: '/', label: 'Home', icon: '🏠' },
     { path: '/buy', label: 'Buy Vegetables', icon: '🛒' },
-    { path: '/plant-detection', label: 'Plant Detection', icon: '🌱' },
+    { path: '/plant-detection', label: 'Plant Disease Detection', icon: '🌱' },
     { path: '/fertilizer-info', label: 'Fertilizer Info', icon: '🧪' },
     { path: '/weather-forecast', label: 'Weather', icon: '☀️' },
     { path: '/seasonal-crop', label: 'Seasonal Crop', icon: '🌾' },
@@ -54,6 +54,16 @@ function Navbar() {
     navigate('/');
   };
 
+  const handleResetDemoData = () => {
+    if (window.confirm('Are you sure you want to reset all demo data? This will restore all default products, orders, and reports.')) {
+      import('../services/localStorage').then((module) => {
+        module.initializeDatabase(true);
+        handleUserMenuClose();
+        window.location.reload();
+      });
+    }
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'navbar-modern shadow-2xl' : 'navbar-modern'
@@ -61,22 +71,46 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <img 
-                src={logo} 
-                alt="AgriSmart Logo" 
-                className="w-10 h-10 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300"
-              />
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-farm-green-400 rounded-full animate-pulse"></div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-display font-bold text-white group-hover:text-farm-green-300 transition-colors duration-300">
-                AgriSmart
-              </span>
-              <span className="text-xs text-farm-green-200 font-medium">Smart Farming</span>
-            </div>
-          </Link>
+          <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-3 group">
+              <div className="relative">
+                <img 
+                  src={logo} 
+                  alt="AgriSmart Logo" 
+                  className="w-10 h-10 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-farm-green-400 rounded-full animate-pulse"></div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-display font-bold text-white group-hover:text-farm-green-300 transition-colors duration-300">
+                  AgriSmart
+                </span>
+                <span className="text-xs text-farm-green-200 font-medium">Smart Farming</span>
+              </div>
+            </Link>
+            {localStorage.getItem('agrismart_demo_mode') === 'true' && (
+              <div className="flex items-center gap-1">
+                <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  DEMO MODE
+                </span>
+                <button
+                  onClick={() => {
+                    if (window.confirm('Reset all mock database collections to default?')) {
+                      import('../services/localStorage').then((module) => {
+                        module.initializeDatabase(true);
+                        window.location.reload();
+                      });
+                    }
+                  }}
+                  title="Reset Demo Data"
+                  className="p-1 text-gray-400 hover:text-white transition cursor-pointer text-xs"
+                >
+                  🔄
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
@@ -146,6 +180,11 @@ function Navbar() {
                   <MenuItem onClick={() => { navigate('/orders'); handleUserMenuClose(); }}>
                     <ListItemIcon><Dashboard fontSize="small" /></ListItemIcon>
                     <ListItemText>My Orders</ListItemText>
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem onClick={handleResetDemoData}>
+                    <ListItemIcon style={{ fontSize: '1.2rem' }}>🔄</ListItemIcon>
+                    <ListItemText>Reset Demo Data</ListItemText>
                   </MenuItem>
                   <Divider />
                   <MenuItem onClick={handleLogout}>

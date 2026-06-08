@@ -1,5 +1,9 @@
 import axios from 'axios';
 import { API_CONFIG, API_ERRORS } from '../config/api.config';
+import { handleMockRequest } from './mockInterceptor';
+
+// Save reference to default adapter
+const defaultAxiosAdapter = axios.defaults.adapter;
 
 // Create axios instance with absolute URL to backend
 // This ensures all API calls go to http://localhost:9653/api
@@ -9,6 +13,29 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
+  },
+  adapter: async (config) => {
+    const isMockMode = localStorage.getItem('agrismart_demo_mode') === 'true';
+    if (isMockMode) {
+      return handleMockRequest(config);
+    }
+    
+    try {
+      const adapter = defaultAxiosAdapter;
+      if (typeof adapter !== 'function') {
+        return handleMockRequest(config);
+      }
+      return await adapter(config);
+    } catch (error) {
+      // On network connection error, automatically fallback to mock database
+      const isNetworkError = !error.response;
+      if (isNetworkError) {
+        console.warn('📡 Network connection failed. Automatically falling back to offline mock database.');
+        localStorage.setItem('agrismart_demo_mode', 'true');
+        return handleMockRequest(config);
+      }
+      throw error;
+    }
   }
 });
 

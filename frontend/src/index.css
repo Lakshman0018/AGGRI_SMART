@@ -10,13 +10,12 @@
   }
   
   body {
-    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
-    background-image: linear-gradient(to bottom right, var(--color-farm-green-50), var(--color-farm-green-100));
+    background: #f9f9f9; /* Stitch surface background */
     margin: 0;
     min-height: 100vh;
-    line-height: 1.6;
-    font-family: 'Poppins', 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    color: #333;
+    line-height: 1.5;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1a1c1c; /* Stitch on-surface */
     overflow-x: hidden;
   }
 
@@ -25,18 +24,18 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
-    font-weight: 600;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 700;
   }
   
   /* MUI and Tailwind color variables for seamless integration */
   :root {
-    --mui-primary: #16a34a;
-    --mui-primary-light: #22c55e;
-    --mui-primary-dark: #15803d;
-    --mui-secondary: #10b981;
-    --mui-secondary-light: #34d399;
-    --mui-secondary-dark: #059669;
+    --mui-primary: #2e7d32;
+    --mui-primary-light: #dcfce7;
+    --mui-primary-dark: #1b5e20;
+    --mui-secondary: #16a34a;
+    --mui-secondary-light: #bbf7d0;
+    --mui-secondary-dark: #14532d;
   }
 }
 
@@ -68,15 +67,11 @@
   }
 
   .btn-outline {
-    @apply border-2 border-farm-green-600 text-farm-green-600 px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:bg-farm-green-600 hover:text-white active:scale-[0.98] relative;
-    background-size: 200% 100%;
-    background-position: -100% 0;
-    background-image: linear-gradient(to right, transparent 50%, #16a34a 50%);
-    transition: all 0.3s ease-out;
+    @apply border-2 border-white text-white px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:bg-white hover:text-farm-green-700 active:scale-[0.98];
   }
 
-  .btn-outline:hover {
-    background-position: 0 0;
+  .btn-outline-green {
+    @apply border-2 border-farm-green-600 text-farm-green-600 px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:bg-farm-green-600 hover:text-white active:scale-[0.98];
   }
 
   /* Card Styles with Professional Depth */
@@ -92,13 +87,14 @@
   }
 
   .card-gradient {
-    @apply bg-gradient-to-br from-white via-farm-green-50/50 to-farm-green-100/30 rounded-2xl p-8 transition-all duration-500 transform hover:-translate-y-1 border border-farm-green-200/50 backdrop-blur-sm;
-    box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.1), 0 2px 4px -1px rgba(34, 197, 94, 0.06);
+    @apply bg-gradient-to-br from-white via-farm-green-50/30 to-farm-green-50/20 rounded-2xl p-8 transition-all duration-500 border border-farm-green-100/50 backdrop-blur-sm;
+    box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.06), 0 2px 4px -1px rgba(34, 197, 94, 0.04);
   }
 
   .card-gradient:hover {
-    box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.15), 0 10px 10px -5px rgba(34, 197, 94, 0.08);
-    border-color: #16a34a;
+    box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.10), 0 10px 10px -5px rgba(34, 197, 94, 0.06);
+    border-color: rgba(34, 197, 94, 0.3);
+    transform: translateY(-4px);
   }
 
   /* Input Styles with Professional Feel */

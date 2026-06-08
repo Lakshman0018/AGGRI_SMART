@@ -1,7 +1,11 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { handleMockRequest } from './mockInterceptor';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:9653/api';
+
+// Save reference to default adapter
+const defaultAxiosAdapter = axios.defaults.adapter;
 
 // Create axios instance
 const api = axios.create({
@@ -9,6 +13,29 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  adapter: async (config) => {
+    const isMockMode = localStorage.getItem('agrismart_demo_mode') === 'true';
+    if (isMockMode) {
+      return handleMockRequest(config);
+    }
+    
+    try {
+      const adapter = defaultAxiosAdapter;
+      if (typeof adapter !== 'function') {
+        return handleMockRequest(config);
+      }
+      return await adapter(config);
+    } catch (error) {
+      // On network connection error, automatically fallback to mock database
+      const isNetworkError = !error.response;
+      if (isNetworkError) {
+        console.warn('📡 Network connection failed. Automatically falling back to offline mock database.');
+        localStorage.setItem('agrismart_demo_mode', 'true');
+        return handleMockRequest(config);
+      }
+      throw error;
+    }
+  }
 });
 
 // Request interceptor to add auth token

@@ -6,7 +6,7 @@ import farmBg from "../assets/farm-bg.jpg"; // 🌾 Real farm photo background
 
 export default function LandingPage() {
   const features = [
-    { title: "Plant Detection", desc: "Detect crop diseases instantly using AI.", icon: "🌱" },
+    { title: "Plant Disease Detection", desc: "Detect crop diseases instantly using AI.", icon: "🌱" },
     { title: "Fertilizer Info", desc: "Get the right fertilizers for your crops.", icon: "🧪" },
     { title: "Weather Forecast", desc: "Check weather to plan your farming smartly.", icon: "☀️" },
     { title: "Seasonal Crop", desc: "Find the best seasonal crops to grow.", icon: "🌾" },
