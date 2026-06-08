@@ -50,7 +50,9 @@ function BuyVegetables() {
         setError(null);
         const response = await api.get('/products', { limit: 100 });
         if (response && response.status === 'success' && response.data) {
-          const products = Array.isArray(response.data) ? response.data : [];
+          const products = Array.isArray(response.data)
+            ? response.data
+            : (response.data && Array.isArray(response.data.products) ? response.data.products : []);
           const normalizedProducts = products.map((product) => ({
             ...product,
             price: Number(product.price ?? 0),

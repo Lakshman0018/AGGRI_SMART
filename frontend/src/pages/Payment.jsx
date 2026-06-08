@@ -3,6 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { ordersAPI, paymentAPI } from '../api';
 
+const getItemPrice = (priceVal) => {
+  if (typeof priceVal === 'number') return priceVal;
+  if (typeof priceVal === 'string') {
+    return parseFloat(priceVal.replace(/[₹,]/g, '')) || 0;
+  }
+  return 0;
+};
+
 const Payment = () => {
   const navigate = useNavigate();
   const { cartItems, getCartTotal, clearCart, shippingAddress, setShippingAddress } = useCart();
@@ -441,20 +449,37 @@ const Payment = () => {
               
               {/* Cart Items */}
               <div className="space-y-3 mb-6 max-h-60 overflow-y-auto">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-3 pb-3 border-b border-gray-200">
-                    <div className="w-12 h-12 bg-gradient-to-br from-farm-green-50 to-farm-green-100 rounded flex items-center justify-center text-2xl">
-                      {item.image}
+                {cartItems.map((item) => {
+                  const price = getItemPrice(item.price);
+                  return (
+                    <div key={item.id} className="flex items-center space-x-3 pb-3 border-b border-gray-200">
+                      <div className="w-12 h-12 bg-gradient-to-br from-farm-green-50 to-farm-green-100 rounded flex items-center justify-center text-2xl overflow-hidden flex-shrink-0">
+                        {item.emoji ? (
+                          <span className="select-none">{item.emoji}</span>
+                        ) : (
+                          <img 
+                            src={item.imageUrl || item.image || '/images/vegetables.png'} 
+                            alt={item.name} 
+                            className="w-full h-full object-cover" 
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.parentNode.innerText = '🌱';
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-sm truncate">{item.name}</p>
+                        <p className="text-xs text-gray-600">
+                          {item.quantity} kg × {typeof item.price === 'number' ? `₹${item.price}` : item.price}
+                        </p>
+                      </div>
+                      <p className="font-semibold text-farm-green-600 flex-shrink-0">
+                        ₹{(price * item.quantity).toFixed(2)}
+                      </p>
                     </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-sm">{item.name}</p>
-                      <p className="text-xs text-gray-600">{item.quantity} kg × {item.price}</p>
-                    </div>
-                    <p className="font-semibold text-farm-green-600">
-                      ₹{(parseFloat(item.price.replace('₹', '')) * item.quantity).toFixed(2)}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Price Breakdown */}
